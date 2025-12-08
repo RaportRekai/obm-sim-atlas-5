@@ -1,0 +1,49 @@
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: 30.305us
+p99 FCT short flows: 33.93us
+p99.9 FCT short flows: 33.957us
+Average FCT long flows: 5007.496us
+p99 FCT long flows: 5012.605us
+p99.9 FCT long flows: 5012.637us
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: 59.47us
+p99 FCT short flows: 62.581us
+p99.9 FCT short flows: 62.634us
+Average FCT long flows: 5007.424us
+p99 FCT long flows: 5012.245us
+p99.9 FCT long flows: 5012.277us
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 86.826us
+p99 FCT short flows: 91.352us
+p99.9 FCT short flows: 91.431us
+Average FCT long flows: 5007.952us
+p99 FCT long flows: 5013.685us
+p99.9 FCT long flows: 5013.717us
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: 114.185us
+p99 FCT short flows: 120.124us
+p99.9 FCT short flows: 120.228us
+Average FCT long flows: 5008.6us
+p99 FCT long flows: 5014.348us
+p99.9 FCT long flows: 5014.755us
+workloads/websearch-trace-100G-load-0.3.csv.processed
+Average FCT short flows: 22.177us
+p99 FCT short flows: 67.838us
+p99.9 FCT short flows: 115.322us
+Average FCT long flows: 3165.715us
+p99 FCT long flows: 13837.757us
+p99.9 FCT long flows: 18437.883us
+workloads/websearch-trace-100G-load-0.6.csv.processed
+Average FCT short flows: 22.709us
+p99 FCT short flows: 74.568us
+p99.9 FCT short flows: 137.677us
+Average FCT long flows: 4111.714us
+p99 FCT long flows: 14290.68us
+p99.9 FCT long flows: 16365.288us
+workloads/websearch-trace-100G-load-0.9.csv.processed
+Average FCT short flows: 22.697us
+p99 FCT short flows: 82.589us
+p99.9 FCT short flows: 137.081us
+Average FCT long flows: 5367.791us
+p99 FCT long flows: 17851.805us
+p99.9 FCT long flows: 22468.318us
