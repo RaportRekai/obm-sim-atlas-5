@@ -1,427 +1,176 @@
-workloads/incast-trace-100G-degree-0.2.csv.processed
+workloads/websearch-trace-100G-load-0.2.csv.processed
 Average FCT short flows: 101.737us
 p99 FCT short flows: 134.61us
 p99.9 FCT short flows: 134.637us
 Average FCT long flows: 1711.28us
 p99 FCT long flows: 3064.944us
 p99.9 FCT long flows: 3068.702us
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/test_broadcast.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/alt_hier_rd_broadcast_grad128_with_background.csv
-workloads/alt_hier_rd_broadcast_grad128.csv
-workloads/butterfly_allreduce_16_seq_with_background.csv
-workloads/butterfly_allreduce_16_seq.csv
-workloads/hierarchical_butterfly_allreduce_16_seq_with_background.csv
-workloads/hierarchical_butterfly_allreduce_16_seq.csv
-workloads/reduce_scatter_allgather_16_seq_halved_with_background_traffic.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/strict_hierarchical_grad128_with_background.csv
-workloads/strict_hierarchical_grad128.csv
-workloads/reduce_scatter_allgather_16_seq_halved.csv
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 47.974us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 7816.579us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
+Total recv throughput (short, n=26): 58.87 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1258.85 Gbps
+Average recv throughput (long): 45 Gbps
 workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 48.366us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11364.84us
-p99.9 FCT long flows: 12654.576us
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 132.24us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 17864.275us
-p99.9 FCT long flows: 19525.965us
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 47.974us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 7816.579us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 48.366us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11364.84us
-p99.9 FCT long flows: 12654.576us
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 132.24us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 17864.275us
-p99.9 FCT long flows: 19525.965us
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 47.974us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 7816.579us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 48.366us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11364.84us
-p99.9 FCT long flows: 12654.576us
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 132.24us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 17864.275us
-p99.9 FCT long flows: 19525.965us
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 47.974us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 7816.579us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 48.366us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11364.84us
-p99.9 FCT long flows: 12654.576us
-Total recv throughput (short, n=856): 36296.76 Gbps
-Average recv throughput (short): 42.4028 Gbps
-Total recv throughput (long, n=401): 4925.53 Gbps
-Average recv throughput (long): 12.2831 Gbps
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 132.24us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 17864.275us
-p99.9 FCT long flows: 19525.965us
-Total recv throughput (short, n=1301): 55694.84 Gbps
-Average recv throughput (short): 42.8093 Gbps
-Total recv throughput (long, n=567): 4329.16 Gbps
-Average recv throughput (long): 7.6352 Gbps
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 67.545us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 8270.892us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 101.79us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11753.136us
-p99.9 FCT long flows: 12654.576us
-Total recv throughput (short, n=856): 36296.76 Gbps
-Average recv throughput (short): 42.4028 Gbps
-Total recv throughput (long, n=401): 4925.53 Gbps
-Average recv throughput (long): 12.2831 Gbps
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 137.976us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 18423.719us
-p99.9 FCT long flows: 19525.965us
-Total recv throughput (short, n=1301): 55694.84 Gbps
-Average recv throughput (short): 42.8093 Gbps
-Total recv throughput (long, n=567): 4329.16 Gbps
-Average recv throughput (long): 7.6352 Gbps
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 67.545us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 8270.892us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 48.366us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11364.84us
-p99.9 FCT long flows: 12654.576us
-Total recv throughput (short, n=856): 36296.76 Gbps
-Average recv throughput (short): 42.4028 Gbps
-Total recv throughput (long, n=401): 4925.53 Gbps
-Average recv throughput (long): 12.2831 Gbps
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 132.24us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 17864.275us
-p99.9 FCT long flows: 19525.965us
-Total recv throughput (short, n=1301): 55694.84 Gbps
-Average recv throughput (short): 42.8093 Gbps
-Total recv throughput (long, n=567): 4329.16 Gbps
-Average recv throughput (long): 7.6352 Gbps
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 67.545us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 8270.892us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 12.0us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 7665.6us
-p99.9 FCT long flows: 12654.576us
-Total recv throughput (short, n=856): 36296.76 Gbps
-Average recv throughput (short): 42.4028 Gbps
-Total recv throughput (long, n=401): 4925.53 Gbps
-Average recv throughput (long): 12.2831 Gbps
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 11.76us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 11009.712us
-p99.9 FCT long flows: 19525.965us
-Total recv throughput (short, n=1301): 55694.84 Gbps
-Average recv throughput (short): 42.8093 Gbps
-Total recv throughput (long, n=567): 4329.16 Gbps
-Average recv throughput (long): 7.6352 Gbps
-workloads/websearch-trace-100G-load-0.3.csv.processed
-Average FCT short flows: 6.648us
-p99 FCT short flows: 67.545us
-p99.9 FCT short flows: 101.958us
-Average FCT long flows: 2154.859us
-p99 FCT long flows: 8270.892us
-p99.9 FCT long flows: 9209.458us
-Total recv throughput (short, n=423): 18980.0 Gbps
-Average recv throughput (short): 45.0 Gbps
-Total recv throughput (long, n=197): 5172.0 Gbps
-Average recv throughput (long): 26.0 Gbps
-workloads/websearch-trace-100G-load-0.6.csv.processed
-Average FCT short flows: 7.334us
-p99 FCT short flows: 48.366us
-p99.9 FCT short flows: 135.174us
-Average FCT long flows: 3989.232us
-p99 FCT long flows: 11364.84us
-p99.9 FCT long flows: 12654.576us
-Total recv throughput (short, n=856): 36296.76 Gbps
-Average recv throughput (short): 42.4028 Gbps
-Total recv throughput (long, n=401): 4925.53 Gbps
-Average recv throughput (long): 12.2831 Gbps
-workloads/websearch-trace-100G-load-0.9.csv.processed
-Average FCT short flows: 10.145us
-p99 FCT short flows: 132.24us
-p99.9 FCT short flows: 225.84us
-Average FCT long flows: 6211.65us
-p99 FCT long flows: 17864.275us
-p99.9 FCT long flows: 19525.965us
-Total recv throughput (short, n=1301): 55694.84 Gbps
-Average recv throughput (short): 42.8093 Gbps
-Total recv throughput (long, n=567): 4329.16 Gbps
-Average recv throughput (long): 7.6352 Gbps
+Average FCT short flows: 310.184us
+p99 FCT short flows: 388.39us
+p99.9 FCT short flows: 392.647us
+Average FCT long flows: 1762.656us
+p99 FCT long flows: 3222.461us
+p99.9 FCT long flows: 3222.586us
+Total recv throughput (short, n=74): 44.9 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1228.31 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/websearch-trace-100G-load-0.4.csv.processed
+Average FCT short flows: 219.758us
+p99 FCT short flows: 262.506us
+p99.9 FCT short flows: 262.771us
+Average FCT long flows: 1728.596us
+p99 FCT long flows: 3069.721us
+p99.9 FCT long flows: 3073.824us
+Total recv throughput (short, n=50): 39.51 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1239.34 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/websearch-trace-100G-load-0.8.csv.processed
+Average FCT short flows: 356.771us
+p99 FCT short flows: 412.204us
+p99.9 FCT short flows: 412.308us
+Average FCT long flows: 1812.02us
+p99 FCT long flows: 3074.458us
+p99.9 FCT long flows: 3077.214us
+Total recv throughput (short, n=98): 39.17 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1165.35 Gbps
+Average recv throughput (long): 40 Gbps
+workloads/incast-trace-100G-load-0.2.csv.processed
+Average FCT short flows: 101.737us
+p99 FCT short flows: 134.61us
+p99.9 FCT short flows: 134.637us
+Average FCT long flows: 1711.28us
+p99 FCT long flows: 3064.944us
+p99.9 FCT long flows: 3068.702us
+Total recv throughput (short, n=26): 58.87 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1258.85 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.6.csv.processed
+Average FCT short flows: 310.184us
+p99 FCT short flows: 388.39us
+p99.9 FCT short flows: 392.647us
+Average FCT long flows: 1762.656us
+p99 FCT long flows: 3222.461us
+p99.9 FCT long flows: 3222.586us
+Total recv throughput (short, n=74): 44.9 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1228.31 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.4.csv.processed
+Average FCT short flows: 219.758us
+p99 FCT short flows: 262.506us
+p99.9 FCT short flows: 262.771us
+Average FCT long flows: 1728.596us
+p99 FCT long flows: 3069.721us
+p99.9 FCT long flows: 3073.824us
+Total recv throughput (short, n=50): 39.51 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1239.34 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.8.csv.processed
+Average FCT short flows: 356.771us
+p99 FCT short flows: 412.204us
+p99.9 FCT short flows: 412.308us
+Average FCT long flows: 1812.02us
+p99 FCT long flows: 3074.458us
+p99.9 FCT long flows: 3077.214us
+Total recv throughput (short, n=98): 39.17 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1165.35 Gbps
+Average recv throughput (long): 40 Gbps
+workloads/incast-trace-100G-load-0.2.csv.processed
+Average FCT short flows: 101.737us
+p99 FCT short flows: 134.61us
+p99.9 FCT short flows: 134.637us
+Average FCT long flows: 1711.28us
+p99 FCT long flows: 3064.944us
+p99.9 FCT long flows: 3068.702us
+Total recv throughput (short, n=26): 58.87 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1258.85 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.6.csv.processed
+Average FCT short flows: 310.184us
+p99 FCT short flows: 388.39us
+p99.9 FCT short flows: 392.647us
+Average FCT long flows: 1762.656us
+p99 FCT long flows: 3222.461us
+p99.9 FCT long flows: 3222.586us
+Total recv throughput (short, n=74): 44.9 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1228.31 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.4.csv.processed
+Average FCT short flows: 219.758us
+p99 FCT short flows: 262.506us
+p99.9 FCT short flows: 262.771us
+Average FCT long flows: 1728.596us
+p99 FCT long flows: 3069.721us
+p99.9 FCT long flows: 3073.824us
+Total recv throughput (short, n=50): 39.51 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1239.34 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.8.csv.processed
+Average FCT short flows: 356.771us
+p99 FCT short flows: 412.204us
+p99.9 FCT short flows: 412.308us
+Average FCT long flows: 1812.02us
+p99 FCT long flows: 3074.458us
+p99.9 FCT long flows: 3077.214us
+Total recv throughput (short, n=98): 39.17 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1165.35 Gbps
+Average recv throughput (long): 40 Gbps
+workloads/incast-trace-100G-load-0.2.csv.processed
+Average FCT short flows: 101.737us
+p99 FCT short flows: 134.61us
+p99.9 FCT short flows: 134.637us
+Average FCT long flows: 1711.28us
+p99 FCT long flows: 3064.944us
+p99.9 FCT long flows: 3068.702us
+Total recv throughput (short, n=26): 58.87 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1258.85 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.6.csv.processed
+Average FCT short flows: 310.184us
+p99 FCT short flows: 388.39us
+p99.9 FCT short flows: 392.647us
+Average FCT long flows: 1762.656us
+p99 FCT long flows: 3222.461us
+p99.9 FCT long flows: 3222.586us
+Total recv throughput (short, n=74): 44.9 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1228.31 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.4.csv.processed
+Average FCT short flows: 219.758us
+p99 FCT short flows: 262.506us
+p99.9 FCT short flows: 262.771us
+Average FCT long flows: 1728.596us
+p99 FCT long flows: 3069.721us
+p99.9 FCT long flows: 3073.824us
+Total recv throughput (short, n=50): 39.51 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1239.34 Gbps
+Average recv throughput (long): 45 Gbps
+workloads/incast-trace-100G-load-0.8.csv.processed
+Average FCT short flows: 356.771us
+p99 FCT short flows: 412.204us
+p99.9 FCT short flows: 412.308us
+Average FCT long flows: 1812.02us
+p99 FCT long flows: 3074.458us
+p99.9 FCT long flows: 3077.214us
+Total recv throughput (short, n=98): 39.17 Gbps
+Average recv throughput (short): 5 Gbps
+Total recv throughput (long, n=30): 1165.35 Gbps
+Average recv throughput (long): 40 Gbps

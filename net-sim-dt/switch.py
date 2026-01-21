@@ -52,7 +52,7 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [self.total_buffer_size/(self.ports*self.priority_classes) for i in range(self.priority_classes)]
         self.sent = 0
-        self.alpha = [12,10,8]#[10,8,6]#[0.5,0.4,0.2]#[8,2,1]
+        self.alpha = [0.5,0.4,0.2]#[12,10,8]#[10,8,6]#[0.5,0.4,0.2]#[8,2,1]
         self.t = 0
         self.track = 0
 

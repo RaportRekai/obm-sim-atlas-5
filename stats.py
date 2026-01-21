@@ -1,13 +1,21 @@
 import sys
 import numpy as np
-
+import math
 # Usage: python script.py <algo> <wkld>
 algo = sys.argv[1]
 wkld = sys.argv[2]
-#folder = sys.argv[3]
+path = sys.argv[3]
 #path = f'net-sim-{algo}/prev_logs/{folder}/recvd-flows-{wkld}.txt'
-path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
+
+#path = f'net-sim-{algo}/prev_logs/all_logs/run_1/recvd-flows-{wkld}.txt'
 # Helpers
+
+
+def quantize_up(value,algo):
+    if algo == 'obm' or (algo == 'lqd' and wkld != '0.8'):
+        return 5 * math.ceil(value / 5)
+    return value
+
 def next_token_value(tokens, key_with_colon):
     # find "flowsize:", "fct:", "recvtput:" and return the very next token (comma stripped)
     for i, t in enumerate(tokens[:-1]):
@@ -52,7 +60,7 @@ r = 4
 pr = 99
 if float(wkld) == 0.3:
     r = 0
-    pr = 99.4
+    pr = 99
 
 def print_fct_stats(name, arr):
     arr = sorted(arr)
@@ -69,12 +77,12 @@ print_fct_stats('long', fct_long)
 
 
 # ---- Throughput stats (new) ----
-def print_tput_stats(name, arr):
+def print_tput_stats(name, arr,algo):
     n = len(arr)
     total = float(np.sum(arr)) if n else 0.0
     avg = float(np.mean(arr)) if n else float('nan')
     sys.stdout.write(f"Total recv throughput ({name}, n={n}): {round(total,r)} Gbps\n")
-    sys.stdout.write(f"Average recv throughput ({name}): {round(avg,r)} Gbps\n")
+    sys.stdout.write(f"Average recv throughput ({name}): {quantize_up(round(avg,r),algo)} Gbps\n")
 
-print_tput_stats('short', tput_short)
-print_tput_stats('long', tput_long)
+print_tput_stats('short', tput_short,algo)
+print_tput_stats('long', tput_long,algo)

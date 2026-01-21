@@ -52,8 +52,8 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [self.total_buffer_size/(self.ports*self.priority_classes) for i in range(self.priority_classes)]
         self.sent = 0
-        self.alpha_set = [[20,15,10],[8,6,4],[8,6,4]]
-        self.alpha = self.alpha_set[int(load/0.3) -1] 
+        self.alpha_set = [[20,15,10],[20,15,10],[20,15,10]] #[[0.5,0.4,0.2],[0.5,0.4,0.2],[0.5,0.4,0.2]]#[[20,15,10],[8,6,4],[8,6,4]]
+        self.alpha = [20,15,10] #self.alpha_set[int(load/0.3) -1] 
         self.t = 0
         self.track = 0
 
