@@ -71,7 +71,10 @@ class Host:
         
         self.targetdelay = {}   # key: 3-tuple (dst addr, src port, dst port)
                                 # value: target delay for congestion window calculation
+        
+        self.broadcast_groups = {"t1":['h1','h2','h3','h4','h5','h6','h7','h8'],"t2":['h9','h10','h11','h12','h13','h14','h15','h16']}
 
+        self.broad = defaultdict(dict)
 
         self.RTO = {}  # in unit of timeslots
         
@@ -92,6 +95,8 @@ class Host:
         self.fs_max_cwnd  = 90      # pkts cwnd where cushion vanishes
 
         self.lastDecreaseRTT = {}    # This keeps track of RTT at the time of cwnd decrease 
+        
+        self.dupAckCnt = defaultdict(int) 
 
         ################ state for RTO calculation ################
         self.initialized = {}
@@ -110,9 +115,13 @@ class Host:
         min_factor = 2.0 # RTO_min = min_factor * baseRTT
         max_factor = 8.0 # RTO_max = max_factor * baseRTT
         # -------------------------------------
-        
+        # try:
+        #     print(self.initialized[(dst,sport,dport)])
+        # except:
+        #     breakpoint()
         if not self.initialized[(dst,sport,dport)]:
             self.initialized[(dst,sport,dport)] = True
+           
             self.srtt[(dst,sport,dport)] = rtt_sample
             self.rttvar[(dst,sport,dport)] = rtt_sample / 2.0
             self.rto_min[(dst,sport,dport)] = min_factor * rtt_sample
@@ -161,7 +170,10 @@ class Host:
         return False
 
     def logPacket(self, packet):
-        self.packetLogFile.write("src: " + packet.srcAddr + ", dst: " + packet.dstAddr)
+        try:
+            self.packetLogFile.write("src: " + packet.srcAddr + ", dst: " + packet.dstAddr)
+        except:
+            breakpoint()
         self.packetLogFile.write(", sport: " + str(packet.srcPort) + ", dport: " + str(packet.dstPort))
         self.packetLogFile.write(", seqNum: " + str(packet.seqNum) + ", ackNum: " + str(packet.ackNum))
         self.packetLogFile.write(", ackFlag: " + str(packet.ackFlag) + ", ecnFlag: " + str(packet.ecnFlag))
@@ -184,7 +196,7 @@ class Host:
                        # and handle it
             packet = self.link.recv(self.addr, currTimeslot)
             if packet:
-                if packet.dstAddr != self.addr:
+                if packet.dstAddr != self.addr and packet.broadcast==None:
                     sys.stdout.write("Routing Error: Packet with dst " + packet.dstAddr + " was received at " + self.addr + "\n")
                     return
                 packet.route.append((packet.node, packet.entryTimeslot, '-'))
@@ -228,7 +240,19 @@ class Host:
                             # delete finished flow
                             del self.rFlows[(packet.srcAddr,packet.srcPort,packet.dstPort)]
                     elif packet.seqNum > self.rFlows[(packet.srcAddr,packet.srcPort,packet.dstPort)][2]:
-                        self.on_packet(packet) 
+                        self.on_packet(packet)
+                        expected = self.rFlows[(packet.srcAddr, packet.srcPort, packet.dstPort)][2]
+                        ackPacket = Packet(
+                            packet.broadcast if packet.broadcast is not None else packet.dstAddr, packet.srcAddr,
+                            packet.dstPort, packet.srcPort,
+                            0, expected, 1, packet.ecnFlag,
+                            self.addr if packet.broadcast is not None else None
+                        )
+                        ackPacket.hops = packet.hops
+                        ackPacket.sendTimeslot = packet.sendTimeslot
+                        ackPacket.priority = packet.priority
+
+                        ackQueues[packet.srcAddr].put(ackPacket) 
                     elif self.rFlows[(packet.srcAddr,packet.srcPort,packet.dstPort)][5] == 0:
                         self.rFlows[(packet.srcAddr,packet.srcPort,packet.dstPort)][5] = 1
                         ackPacket = Packet(packet.dstAddr, packet.srcAddr, packet.dstPort, packet.srcPort, 0, self.rFlows[(packet.srcAddr,packet.srcPort,packet.dstPort)][2], 1, packet.ecnFlag)
@@ -293,8 +317,12 @@ class Host:
 
             if schedFlow == 1:
                 # send one packet from the chosen flow
+                if self.sFlows[(dst,sport,dport)][-1]:
+                    broadcast = self.sFlows[(dst,sport,dport)][-1]
+                else:
+                    broadcast = None
                 seqNum = self.sFlows[(dst, sport, dport)][1]
-                packet = Packet(self.addr, dst, sport, dport, seqNum, 0, 0, 0)
+                packet = Packet(self.addr, dst, sport, dport, seqNum, 0, 0, 0, broadcast)
                 packet.priority = self.priority[(dst, sport, dport)]
                 packet.sendTimeslot = currTimeslot
                 self.link.send(packet, self.addr, currTimeslot)
@@ -316,12 +344,18 @@ class Host:
         """Handle the packet received on the link
            and send an ack packet for the received packet
            by enqueuing the ack packet into the right ackQueue"""
-        ackPacket = Packet(packet.dstAddr, packet.srcAddr, packet.dstPort, packet.srcPort, 0, packet.seqNum+1, 1, packet.ecnFlag)
+        
+        ackPacket = Packet(packet.broadcast if packet.broadcast != None else packet.dstAddr, packet.srcAddr, packet.dstPort, packet.srcPort, 0, packet.seqNum+1, 1, packet.ecnFlag, self.addr if packet.broadcast != None else None )
         ackPacket.hops = packet.hops
         ackPacket.sendTimeslot = packet.sendTimeslot
-        ackQueues[packet.srcAddr].put(ackPacket)
         self.on_packet(packet)
         ackPacket.priority = packet.priority
+        ackQueues[packet.srcAddr].put(ackPacket)
+        #if ackPacket.dstPort == 20050 or ackPacket.srcPort == 20050:
+            #print(ackPacket.srcAddr)
+            # if packet.broadcast == None or packet.broadcast == 'h2':
+            #     breakpoint()
+            
         # if True:
         #     print("True packet received")
         #     breakpoint()
@@ -344,9 +378,40 @@ class Host:
             dst = ackPacket.srcAddr
             sport = ackPacket.dstPort
             dport = ackPacket.srcPort
+            # if ackPacket.dstPort == 20050 or ackPacket.srcPort == 20050:
+            #     print(ackPacket.srcAddr)
+            #     if ackPacket.srcAddr == 'h2':
+            #         breakpoint()
             self.RTO[(dst,sport,dport)] = self.update(currTimeslot - ackPacket.sendTimeslot,dst,sport,dport)
-            assert(ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2] or ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2]+1)
-            if ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2]+1:
+            try:
+                assert(self.sFlows[(dst,sport,dport)][2] <= ackPacket.ackNum <= self.sFlows[(dst,sport,dport)][1])
+            except:
+                breakpoint()
+            
+            resend = 0
+            ackNum = -1
+            
+            ## here we will introduce broadcast functionality
+            if ackPacket.broadcast is not None:
+                self.broad[(dst,sport,dport)][ackPacket.broadcast] = ackPacket.ackNum
+                ackNum = min(self.broad[(dst,sport,dport)].values())
+            else:
+                ackNum = ackPacket.ackNum
+
+            if ackNum == self.sFlows[(dst, sport, dport)][2] and ackPacket.broadcast == None:
+                self.dupAckCnt[(dst, sport, dport)] += 1
+                if self.dupAckCnt[(dst, sport, dport)] >= 3:
+                    resend = 1
+            elif ackNum == self.sFlows[(dst, sport, dport)][2] and ackPacket.broadcast != None:
+                self.dupAckCnt[(ackPacket.broadcast,sport,dport)]+=1
+            elif ackPacket.broadcast == None:
+                self.dupAckCnt[(dst, sport, dport)] = 0
+                resend = 0
+            elif ackPacket.broadcast != None:
+                self.dupAckCnt[(ackPacket.broadcast, sport, dport)] = 0
+                resend = 0
+            
+            if ackNum == self.sFlows[(dst,sport,dport)][2]+1:
                 self.sFlows[(dst,sport,dport)][2] += 1
                 
                 if (dst,sport,dport) in self.rrSched: # the flow exists
@@ -392,7 +457,11 @@ class Host:
                         self.numAckRecvdInCurrWin[(dst,sport,dport)] = 0
 
             ###################### adding fast recovery ####################
-            elif ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2]: # dup ack
+            elif resend == 1: # dup ack
+                if ackPacket.broadcast == None:
+                    self.dupAckCnt[(dst, sport, dport)] = 0
+                else:
+                    self.dupAckCnt[(ackPacket.broadcast, sport, dport)] = 0
                 if currTimeslot - self.lastDecrease[(dst,sport,dport)] >= self.lastDecreaseRTT [(dst,sport,dport)]:
                     self.sFlows[(dst,sport,dport)][1] = self.sFlows[(dst,sport,dport)][2]
                     self.retransmissionCnt[(dst,sport,dport)] = 0

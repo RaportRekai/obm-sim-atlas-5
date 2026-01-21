@@ -1,0 +1,3 @@
+Id,src,dst,sport,dport,flowsize,startTimeslot,broadcast
+1,h1,h9,10001,20001,128,0,t2
+1,h9,h1,10011,20011,128,0,t1

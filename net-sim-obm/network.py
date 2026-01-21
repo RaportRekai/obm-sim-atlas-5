@@ -209,6 +209,8 @@ class Network:
                         f.write(f"{src},{dst},{sport},{dport}," + ",".join(map(str, seqs)) + "\n")
                 with open("reordering_obm.txt", "a", encoding="utf-8") as f:
                     f.write(f"drop count = {sum(self.drops.values())}\n")
+
+                
                 break
 
         if currTimeslot >= endTimeslot:

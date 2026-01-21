@@ -2,7 +2,7 @@
 """
 plot_fct_bars.py
 ────────────────
-Parse stats files (DT/ABM/OBM/LQD) and draw grouped-bar charts.
+Parse stats files (DT/ABM/OBM/LQD/Credence/Occamy) and draw grouped-bar charts.
 
 All graphs are **normalized to OBM**:
   • Normalized 99-percentile FCT (short / medium / long)
@@ -19,7 +19,7 @@ Input lines expected in each stats_*.txt (examples):
   - "Average recv throughput (long): 5.246 Gbps"
 
 Usage:
-  python plot_fct_bars.py --files stats_dt.txt stats_abm.txt stats_obm.txt stats_lqd.txt --outdir graphs --dpi 180
+  python plot_fct_bars.py --files stats_dt.txt stats_abm.txt stats_obm.txt stats_lqd.txt stats_credence.txt stats_occamy.txt --outdir graphs --dpi 180
 """
 
 import os
@@ -32,12 +32,16 @@ from collections import defaultdict
 
 # ── Display mapping ──────────────────────────────────────────────
 ALGO_META = {
-    "dt":  ("DT",  "#00FFFF"),
-    "abm": ("ABM", "#FFD700"),
-    "obm": ("OBM", "#FF0000"),
-    "lqd": ("LQD", "#32CD32"),
+    "dt":       ("DT",       "#00FFFF"),
+    "abm":      ("ABM",      "#FFD700"),
+    "obm":      ("OBM",      "#FF0000"),
+    "lqd":      ("LQD",      "#32CD32"),
+    "credence": ("Credence", "#9400D3"),
+    "occamy":   ("Occamy",   "#1E90FF"), # Added Occamy (Blue)
 }
-ORDERED_LABELS = ["DT", "ABM", "OBM", "LQD"]
+
+# Updated order to include Occamy
+ORDERED_LABELS = ["DT", "ABM", "OBM", "LQD", "Credence", "Occamy"]
 BASELINE_LABEL = "OBM"  # normalization reference (must match an ORDERED_LABELS item)
 
 DATASET_XLABEL = {"incast": "Incast Degree", "websearch": "Network Load"}
@@ -153,7 +157,7 @@ def grouped_bars(ax, x_ticks, data_by_label, colors, ylabel, dataset):
     ax.set_axisbelow(True)
 
 def square_legend(ax, loc="upper left"):
-    """Legend in a square-ish grid (4 items → 2×2)."""
+    """Legend in a square-ish grid (dynamic columns)."""
     import math
     ncol = int(math.ceil(math.sqrt(len(ORDERED_LABELS))))
     lgd = ax.legend(loc=loc, frameon=True, fontsize=LEGEND_FONTSIZE,
@@ -248,7 +252,8 @@ def plot_all(agg, outdir, dpi: int):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--files", nargs="*", default=[
-        "stats_dt.txt", "stats_abm.txt", "stats_obm.txt", "stats_lqd.txt",
+        "stats_dt.txt", "stats_abm.txt", "stats_obm.txt",
+        "stats_lqd.txt", "stats_credence.txt", "stats_occamy.txt"
     ], help="Paths to stats files (any order).")
     ap.add_argument("--outdir", default=".", help="Where to write PNGs.")
     ap.add_argument("--dpi", type=int, default=180,
@@ -262,10 +267,12 @@ def main():
         base = os.path.basename(path).lower()
         algo_key = None
         if "stats_" in base:
-            if   "dt"  in base: algo_key = "dt"
-            elif "abm" in base: algo_key = "abm"
-            elif "obm" in base: algo_key = "obm"
-            elif "lqd" in base: algo_key = "lqd"
+            if   "dt"       in base: algo_key = "dt"
+            elif "abm"      in base: algo_key = "abm"
+            elif "obm"      in base: algo_key = "obm"
+            elif "lqd"      in base: algo_key = "lqd"
+            elif "credence" in base: algo_key = "credence"
+            elif "occamy"   in base: algo_key = "occamy" # Added parsing for Occamy
         if not algo_key:
             continue
         if not os.path.isfile(path):
