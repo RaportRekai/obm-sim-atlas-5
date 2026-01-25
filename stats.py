@@ -4,9 +4,9 @@ import math
 # Usage: python script.py <algo> <wkld>
 algo = sys.argv[1]
 wkld = sys.argv[2]
-path = sys.argv[3]
+#path = sys.argv[3]
 #path = f'net-sim-{algo}/prev_logs/{folder}/recvd-flows-{wkld}.txt'
-
+path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
 #path = f'net-sim-{algo}/prev_logs/all_logs/run_1/recvd-flows-{wkld}.txt'
 # Helpers
 

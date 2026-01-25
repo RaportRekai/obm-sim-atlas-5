@@ -22,12 +22,12 @@ class Network:
         # parse configuration details
         netJsonFile = open(netJsonFilepath, 'r')
         netJson = json.load(netJsonFile)
-        self.logname = logname
         self.num_tor_ports = netJson["num_tor_ports"]
         self.num_agg_ports = netJson["num_agg_ports"]
         self.hosts_per_rack = netJson["hosts_per_rack"]
 
         # parse and create switches, hosts, and links
+        self.load = logname
         self.reordering_pairs = defaultdict(lambda: defaultdict(list))
         self.switches = self.parseswitches(netJson["switches"])
         self.hosts = self.parseHosts(netJson["hosts"])
@@ -42,7 +42,7 @@ class Network:
         switches = {}
         for addr in switchParams:
            
-            switches[addr] = Switch(addr, self.num_tor_ports, self.num_agg_ports, self.hosts_per_rack,float(self.logname))
+            switches[addr] = Switch(addr, self.load,self.num_tor_ports, self.num_agg_ports, self.hosts_per_rack)
         return switches
 
 

@@ -59,7 +59,8 @@ TICK_WIDTH      = 2.4
 MAX_YTICKS = 9
 
 WORKLOAD_RE = re.compile(
-    r"workloads/(?P<kind>incast|websearch)-trace-100G-(?P<axis>degree|load)-(?P<val>[0-9.]+)\.csv\.processed",
+    r"workloads/(?P<kind>websearch)-trace-100G-(?P<axis>degree|load)-(?P<val>[0-9.]+)\.csv\.processed",
+    #r"workloads/(?P<kind>incast|websearch)-trace-100G-(?P<axis>degree|load)-(?P<val>[0-9.]+)\.csv\.processed",
     re.I
 )
 

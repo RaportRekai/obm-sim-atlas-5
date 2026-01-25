@@ -28,6 +28,7 @@ class Switch():
         self.packet_dropped = 0
         self.port_qsize = {}  # number of packets queued per port
         self.priority_classes = 3
+
         
         if self.addr[0] == 't':
             self.ports = num_tor_ports
@@ -52,6 +53,9 @@ class Switch():
         self.buffer = [[-1,-1] for i in range(self.N)]
         self.priority_max_q_l = 0
         self.dropped = []
+        self.weights = [3,2,1]
+        self.current_prio_idx = {port+1: 0 for port in range(self.N)}
+        self.tokens = {port+1: self.weights[0] for port in range(self.N)}
 
         # --- DATA ACQUISITION / TRAINING VARIABLES (IMPORTED) ---
         self.avg_q_len = 0.0
@@ -74,32 +78,73 @@ class Switch():
         self.t+=1
         self.dropped = []
 
+        # Ensure self.weights, self.current_prio_idx, and self.tokens are initialized in __init__
+
         for port in self.links.keys():
-            flag_1 = 0
-            for i in range(self.priority_classes):
-                if not self.queues[port][i].empty():
-                    for j in range(0,self.queues[port][i].qsize()):
-                        packet = self.queues[port][i].get_nowait()
-                        if packet.invalid == 0:
-                            packet.hops +=1
-                            self.links[port].send(packet, self.addr, currTimeslot)
-                            
-                            self.port_qsize[port] -= 1
-                            self.sent+=1
-                            self.total_usage-=1 
-                            self.voq_port_qsize[port-1][i]-=1
-                            flag_1 = 1
-                            assert(self.port_qsize[port] >= 0)
-                            break
-                        else:
-                            # Packet was virtually dropped by LQD
-                            self.dropped.append((packet.dstAddr,packet.srcAddr,packet.srcPort,packet.dstPort,packet.seqNum))
+            sent_in_this_slot = False
+            
+            # Work-conserving loop: Attempt up to 'priority_classes' times to find work
+            for _ in range(self.priority_classes):
+                prio = self.current_prio_idx[port]
+                
+                # 1. Refill Logic: If tokens are exhausted, move pointer and refill
+                if self.tokens[port] <= 0:
+                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
+                    prio = self.current_prio_idx[port]
+                    self.tokens[port] = self.weights[prio]
 
-                    if flag_1:
-                        break
+                # 2. Check Queue
+                if not self.queues[port][prio].empty():
+                    # Get the single packet at the head of the line
+                    packet = self.queues[port][prio].get_nowait()
+                    
+                    if packet.invalid == 0:
+                        # --- VALID PACKET ---
+                        packet.hops += 1
+                        self.links[port].send(packet, self.addr, currTimeslot)
+                        
+                        # Update Stats
+                        self.port_qsize[port] -= 1
+                        self.sent += 1
+                        self.total_usage -= 1 
+                        self.voq_port_qsize[port-1][prio] -= 1
+                        
+                        # WRR: Consume token & Success
+                        self.tokens[port] -= 1
+                        sent_in_this_slot = True
+                        assert(self.port_qsize[port] >= 0)
+
+                        # Post-send: If tokens done or queue empty, prep next prio for NEXT slot
+                        if self.tokens[port] <= 0 or self.queues[port][prio].empty():
+                            self.tokens[port] = 0
+                            self.current_prio_idx[port] = (prio + 1) % self.priority_classes
+                        
+                        break # Packet sent! Stop processing this port.
+
+                    else:
+                        # --- INVALID PACKET ---
+                        # Log the drop
+                        self.dropped.append((packet.dstAddr, packet.srcAddr, packet.srcPort, packet.dstPort, packet.seqNum))
+                        
+                        # WRR: Consume token (penalty for processing invalid packet)
+                        self.tokens[port] -= 1
+                        
+                        # Check for exhaustion
+                        if self.tokens[port] <= 0 or self.queues[port][prio].empty():
+                            self.tokens[port] = 0
+                        
+                        # Move Pointer Immediately
+                        self.current_prio_idx[port] = (prio + 1) % self.priority_classes
+                        
+                        # Continue the loop to check the NEXT priority immediately
+                        continue 
+
                 else:
+                    # 3. EMPTY QUEUE
+                    # "Waste" tokens and move to next priority to keep searching
+                    self.tokens[port] = 0
+                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
                     continue
-
         self.k = 0
         self.buffer = [[-1,-1] for i in range(self.N)]
         

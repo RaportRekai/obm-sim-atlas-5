@@ -55,47 +55,76 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [[self.total_buffer_size/(self.ports*self.priority_classes) for _ in range(self.priority_classes)] for i in range(self.ports)]
         self.sent = 0
-        self.alpha = [0.8,0.6,0.4]#[20,15,10]#[0.8,0.6,0.4]
+        #self.alpha = [20,15,10]#[0.8,0.6,0.4]#[20,15,10]#[0.8,0.6,0.4]
+        self.alpha = [18,16,14]
+        self.weights = [3,2,1]  # weights for WRR scheduling per priority class
         self.t = 0
         self.t_track = 0
         self.np = [0]*self.priority_classes
         self.bwu = [[0 for i in range(self.priority_classes)] for _ in range(self.ports)]
         self.nqa = [[1 for i in range(self.priority_classes)] for _ in range(self.ports)]
+        self.current_prio = {port+1: 0 for port in range(self.N)}
+        self.tokens = {port+1: self.weights[0] for port in range(self.N)}
 
     def runSwitch(self, currTimeslot):
         """Main loop of switch"""
         self.t+=1
         
-        for port in self.links.keys():  # in each timeslot, send a packet
-                                        # at the head of a VOQ at each port.
-                                        # VOQs at each port are scheduled in
-                                        # round robin manner
-            flag_1 = 0
-            for i in range(self.priority_classes):
-                if not self.queues[port][i].empty():
-                    for j in range(0,self.queues[port][i].qsize()):
-                        packet = self.queues[port][i].get_nowait()
+        # Assuming self.weights = [3, 2, 1]
+# Initialize self.current_prio = {port: 0 for port in self.links.keys()}
+# Initialize self.tokens = {port: self.weights[0] for port in self.links.keys()}
+
+        for port in self.links.keys():
+            sent_in_this_slot = False
+            
+            # Check up to 'priority_classes' to ensure work-conservation
+            for _ in range(self.priority_classes):
+                prio = self.current_prio[port]
+                
+                # 1. Refill check: If tokens are 0, move to next and refill
+                if self.tokens[port] <= 0:
+                    self.current_prio[port] = (prio + 1) % self.priority_classes
+                    prio = self.current_prio[port]
+                    self.tokens[port] = self.weights[prio]
+                
+                # 2. Check for work
+                if not self.queues[port][prio].empty():
+                    # Standard extraction logic to find a valid packet
+                    found_valid = False
+                    for j in range(self.queues[port][prio].qsize()):
+                        packet = self.queues[port][prio].get_nowait()
                         if packet.invalid == 0:
-                            packet.hops+=1
+                            packet.hops += 1
                             self.bwu[port-1][packet.priority-1] += 1
                             self.links[port].send(packet, self.addr, currTimeslot)
-                            # print(f"sending packet from {i} when other prioritites have length = {self.voq_port_qsize[port-1]}")
-                            # if i == 0:
-                            #     breakpoint()
                             
+                            # Stats
                             self.port_qsize[port] -= 1
-                            self.sent+=1
-                            self.total_usage-=1 
-                            self.voq_port_qsize[port-1][i]-=1
-                            flag_1 = 1
-                            assert(self.port_qsize[port] >= 0)
+                            self.sent += 1
+                            self.total_usage -= 1 
+                            self.voq_port_qsize[port-1][prio] -= 1
+                            
+                            # Consume token
+                            self.tokens[port] -= 1
+                            sent_in_this_slot = True
+                            found_valid = True
                             break
-
-                    if flag_1:
-                        break
-
+                    
+                    # 3. Post-send check: If queue is now empty or tokens hit 0, prep next prio
+                    if self.tokens[port] <= 0 or self.queues[port][prio].empty():
+                        # We set to 0 so the next iteration (or next timeslot) triggers a move/refill
+                        self.tokens[port] = 0 
+                        # Optional: You can advance the pointer here or let the next iteration handle it
+                    
+                    if sent_in_this_slot:
+                        break # Finished for this egress port in this timeslot
+                
                 else:
-                    continue
+                    # 4. Work-conserving skip: Queue is empty
+                    # Clear tokens for this class and loop back to check the next priority
+                    self.tokens[port] = 0
+                    # By looping, the next '_' iteration hits the refill check at the top
+
 
 
         for port in self.links.keys():  # in each timeslot, receive a
@@ -127,7 +156,12 @@ class Switch():
         outPort = int(hashlib.sha256(flowid.encode('utf-8')).hexdigest(), 16) % (self.num_tor_ports - self.hosts_per_rack) + (self.hosts_per_rack + 1)
         return outPort
 
-
+    def move_to_next_prio(self, port):
+        # Move pointer to next priority class
+        self.current_prio[port] = (self.current_prio[port] + 1) % self.priority_classes
+        # Reload tokens for the new priority
+        self.tokens[port] = self.weights[self.current_prio[port]]
+        
     def getOutPort(self, switchId, packet):
         if switchId[0] == 't':
             if int(packet.dstAddr[1:]) >= int(switchId[1])*16-15 and int(packet.dstAddr[1:]) <= int(switchId[1])*16:

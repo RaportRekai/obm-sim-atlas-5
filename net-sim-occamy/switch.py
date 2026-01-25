@@ -12,7 +12,7 @@ import copy
 class Switch():
     """Switch class"""
 
-    def __init__(self, addr, num_tor_ports, num_agg_ports, hosts_per_rack,load):
+    def __init__(self, addr, load, num_tor_ports, num_agg_ports, hosts_per_rack):
         """Initialize parameters"""
         self.addr = addr  # address of switch
         self.links = {}   # links indexed by port
@@ -52,11 +52,15 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [self.total_buffer_size/(self.ports*self.priority_classes) for i in range(self.priority_classes)]
         self.sent = 0
-        self.alpha_set = [[20,15,10],[20,15,10],[20,15,10]] #[[0.5,0.4,0.2],[0.5,0.4,0.2],[0.5,0.4,0.2]]#[[20,15,10],[8,6,4],[8,6,4]]
-        self.alpha = [20,15,10] #self.alpha_set[int(load/0.3) -1] 
+        # self.alpha_set = [[20,15,10],[20,15,10],[20,15,10]] #[[0.5,0.4,0.2],[0.5,0.4,0.2],[0.5,0.4,0.2]]#[[20,15,10],[8,6,4],[8,6,4]]
+        # self.alpha = [20,15,10] #self.alpha_set[int(load/0.3) -1] 
+        self.alpha_set = [[20,15,10],[10,8,4],[20,15,10]] 
+        self.alpha = self.alpha_set[int(float(load)/0.3) -1] 
         self.t = 0
         self.track = 0
-
+        self.weights = [3,2,1]
+        self.current_prio_idx = {port+1: 0 for port in range(self.N)}
+        self.tokens = {port+1: self.weights[0] for port in range(self.N)}
         # --- OCCAMY VARIABLES ---
         self.drop_timer = 0
         self.expulsion_rr_idx = 0 # To track Round Robin across ports for fairness
@@ -115,45 +119,64 @@ class Switch():
                 if packet_expelled:
                     break
 
-        # ---------------------------------------------------------------------
-        # 2. PACKET SENDING LOGIC (Updated to skip Expelled Packets)
-        # ---------------------------------------------------------------------
-        for port in self.links.keys(): 
-            
-            flag_1 = 0
-            for i in range(self.priority_classes):
-                if not self.queues[port][i].empty():
-                    
-                    # We might encounter "invalid" packets at the head. 
-                    # We must drain them until we find a valid one or the queue is empty.
-                    while not self.queues[port][i].empty():
-                        
-                        # Get packet (peek is not standard in queue.Queue, so we get it)
-                        packet = self.queues[port][i].get_nowait()
-                        
-                        # If packet was expelled (invalid), discard and loop again
-                        if packet.invalid == 1:
-                            continue 
-                        
-                        # VALID PACKET FOUND
-                        else:
-                            packet.hops += 1
-                            self.links[port].send(packet, self.addr, currTimeslot)
-                            
-                            self.port_qsize[port] -= 1
-                            self.sent += 1
-                            self.total_usage -= 1 
-                            self.voq_port_qsize[port-1][i] -= 1
-                            
-                            flag_1 = 1
-                            assert(self.port_qsize[port] >= 0)
-                            break # Break the while loop (packet sent)
-                    
-                    if flag_1:
-                        break # Break the priority loop (one packet sent per port per timeslot)
+        # Assuming self.weights = [3, 2, 1]
+        # Initialize self.current_prio_idx and self.tokens in __init__
 
-                else:
-                    continue
+        for port in self.links.keys(): 
+            sent_in_this_slot = False
+            
+            # Work-conserving: Check up to 'priority_classes' to find a valid packet
+            for _ in range(self.priority_classes):
+                prio = self.current_prio_idx[port]
+                
+                # 1. Refill Logic: If current priority tokens are exhausted, move and refill
+                if self.tokens[port] <= 0:
+                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
+                    prio = self.current_prio_idx[port]
+                    self.tokens[port] = self.weights[prio]
+
+                # 2. Search for a valid packet in the CURRENT queue
+                # We drain invalid packets without consuming tokens or moving the pointer
+                while not self.queues[port][prio].empty():
+                    packet = self.queues[port][prio].get_nowait()
+                    
+                    if packet.invalid == 1:
+                        # Discard and immediately check the next packet in the SAME queue
+                        # Note: No token is consumed here.
+                        continue 
+                    
+                    # --- VALID PACKET FOUND ---
+                    packet.hops += 1
+                    self.links[port].send(packet, self.addr, currTimeslot)
+                    
+                    # Update stats
+                    self.port_qsize[port] -= 1
+                    self.sent += 1
+                    self.total_usage -= 1 
+                    self.voq_port_qsize[port-1][prio] -= 1
+                    
+                    # WRR: Now we finally consume a token
+                    self.tokens[port] -= 1
+                    sent_in_this_slot = True
+                    assert(self.port_qsize[port] >= 0)
+                    break # Exit while loop because we sent a packet
+
+                # 3. Decision Logic for Pointer Movement
+                # Case A: We just sent a packet and exhausted our tokens
+                if sent_in_this_slot and self.tokens[port] <= 0:
+                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
+                    # Refill happens in the next cycle
+
+                # Case B: The queue is empty (all valid/invalid packets gone) 
+                # but we didn't send anything yet. We must move to next queue to be work-conserving.
+                elif not sent_in_this_slot and self.queues[port][prio].empty():
+                    self.tokens[port] = 0 # "Discard" remaining tokens for this empty queue
+                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
+                    # Continue the 'for _' loop to check the next priority immediately
+
+                # 4. If a packet was sent, we are done with this port for this timeslot
+                if sent_in_this_slot:
+                    break
 
         # ---------------------------------------------------------------------
         # 3. PACKET RECEIVING LOGIC
