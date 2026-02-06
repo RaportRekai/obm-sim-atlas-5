@@ -36,7 +36,7 @@ ALGO_META = {
     "abm":      ("ABM",      "#FFD700"),
     "obm":      ("OBM",      "#FF0000"),
     "lqd":      ("LQD",      "#32CD32"),
-    "credence": ("Credence", "#9400D3"),
+    "credence": ("Credence", "#555555"),
     "occamy":   ("Occamy",   "#1E90FF"), # Added Occamy (Blue)
 }
 
@@ -119,7 +119,7 @@ def compact_even_ticks(ax, max_ticks: int, bottom: float = 0.0):
         ax.tick_params(axis="y", labelsize=YTICK_FONTSIZE, length=TICK_LENGTH, width=TICK_WIDTH)
         return
     delta = ticks[1] - ticks[0]
-    ax.set_ylim(top=ticks[-1] + delta, bottom=bottom)
+    ax.set_ylim(top=ticks[-1] + 2*delta, bottom=bottom)
     ax.yaxis.set_major_locator(locator)
     ticks2 = [t for t in ax.get_yticks() if t >= bottom]
     if len(ticks2) >= 2:

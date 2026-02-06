@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 1. defined as proper Bash arrays
-algo_run_no=(1 2 2 1 8 1)
+algo_run_no=(4 2 2 1 8 1)
 algo=("credence" "dt" "abm" "obm" "occamy" "lqd")
 
 # NOTE: $wkld is used below but not defined. 
