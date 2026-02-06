@@ -36,7 +36,7 @@ ALGO_META = {
     "abm":      ("ABM",      "#FFD700"),
     "obm":      ("OBM",      "#FF0000"),
     "lqd":      ("LQD",      "#32CD32"),
-    "credence": ("Credence", "#9400D3"),
+    "credence": ("Credence", "#555555"),
     "occamy":   ("Occamy",   "#1E90FF"), # Added Occamy (Blue)
 }
 
