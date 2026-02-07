@@ -189,7 +189,6 @@ class Host:
                     return
                 packet.route.append((packet.node, packet.entryTimeslot, '-'))
                 self.logPacket(packet)
-
                 if packet.ackFlag == 0:
                     if (packet.srcAddr,packet.srcPort,packet.dstPort) not in self.rFlows:
                         pass
@@ -240,6 +239,7 @@ class Host:
 
         # strict-priority scheduling (highest priority first), RR within same priority
         # assumes larger numeric 'priority' = higher priority
+        
         if len(self.rrSched) > 0:
             dst = "0"
             sport = 0
@@ -247,26 +247,26 @@ class Host:
 
             i = 0
             schedFlow = 0
+           
             while i < len(self.rrSched):
                 i += 1
                 dst, sport, dport = self.rrSched[self.rrPointer]
+                
                 if self.numPktSentInCurrWin[(dst,sport,dport)] < self.cwnd[(dst,sport,dport)] and self.sFlows[(dst,sport,dport)][1] < self.sFlows[(dst,sport,dport)][0]:
                     schedFlow = 1
                     if self.numPktSentInCurrWin[(dst,sport,dport)] == 0:
                         self.numAckRecvdInCurrWin[(dst,sport,dport)] = 0
                     break
+                # elif self.numPktSentInCurrWin[(dst,sport,dport)] >= self.cwnd[(dst,sport,dport)]:
+                #     breakpoint()
+                
+                 
                 elif currTimeslot - self.sFlows[(dst,sport,dport)][3] >= 1000:#self.RTO[(dst,sport,dport)]: # timer expired
                     self.sFlows[(dst,sport,dport)][1] = self.sFlows[(dst,sport,dport)][2]
                     self.numPktSentInCurrWin[(dst,sport,dport)] = 0
                     self.numAckRecvdInCurrWin[(dst,sport,dport)] = 0
-                    if self.addr == '106':
-                        print(currTimeslot - self.sFlows[(dst,sport,dport)][3])
-                        print(self.RTO[(dst,sport,dport)])
-                        print(f"last packet sent at = {self.sFlows[(dst,sport,dport)][3]}")
-                        print(f"current timeslot = {currTimeslot}")
-                        print(f"cwnd = {self.cwnd}")
-                        print(f"packet sent in window = {self.numPktSentInCurrWin}")
-                        print(f"sender address = {self.addr}")
+                
+                    
                     
 
                     assert(self.numPktSentInCurrWin[(dst,sport,dport)] >= 0)
@@ -404,6 +404,7 @@ class Host:
 
             """delete scheduled flow if acks for all packets from the flow have been received"""
             if self.sFlows[(dst,sport,dport)][0] == self.sFlows[(dst,sport,dport)][2]:
+                #breakpoint()
                 del self.sFlows[(dst,sport,dport)]
                 del self.cwnd[(dst,sport,dport)]
                 del self.alpha[(dst,sport,dport)]

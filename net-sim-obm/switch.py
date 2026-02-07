@@ -276,12 +276,16 @@ class Switch():
                 for p in range(3,packet.priority,-1):
                     if self.voq_port_qsize[outPort-1][p - 1]>0:
                         enter = 1
-                        #breakpoint()
+                    # else:
+                    #     if self.addr == 't9' and packet.dstAddr == 'h144':
+
+                    #         breakpoint()
                     
             if outPort != (self.largest_index) or (enter == 1):
                 self.buffer[inPort-1] = [packet,outPort]
                 self.packet_dropped+=1
-                 
+                if self.addr == 't9' and packet.dstAddr == 'h144' and packet.priority == 3:
+                    breakpoint()
                 # if packet.priority == 1:  
                 #     #breakpoint()
                 print("Initiated LQD")

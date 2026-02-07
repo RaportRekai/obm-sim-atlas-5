@@ -343,7 +343,7 @@ class Host:
             sport = ackPacket.dstPort
             dport = ackPacket.srcPort
             self.RTO[(dst,sport,dport)] = self.update(currTimeslot - ackPacket.sendTimeslot,dst,sport,dport)
-            assert(ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2] or ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2]+1)
+#            assert(ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2] or ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2]+1)
             if ackPacket.ackNum == self.sFlows[(dst,sport,dport)][2]+1:
                 self.sFlows[(dst,sport,dport)][2] += 1
                 

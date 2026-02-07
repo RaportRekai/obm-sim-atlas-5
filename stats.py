@@ -4,9 +4,10 @@ import math
 # Usage: python script.py <algo> <wkld>
 algo = sys.argv[1]
 wkld = sys.argv[2]
-path = sys.argv[3]
+#folder = sys.argv[3]
+#path = sys.argv[3]
 #path = f'net-sim-{algo}/prev_logs/{folder}/recvd-flows-{wkld}.txt'
-
+path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
 #path = f'net-sim-{algo}/prev_logs/all_logs/run_1/recvd-flows-{wkld}.txt'
 # Helpers
 
@@ -58,9 +59,9 @@ with open(path, 'r') as f:
 # ---- FCT stats (unchanged behavior) ----
 r = 4
 pr = 99
-if float(wkld) == 0.3:
+if float(wkld) == 0.62:
     r = 0
-    pr = 99
+    pr = 86
 
 def print_fct_stats(name, arr):
     arr = sorted(arr)
