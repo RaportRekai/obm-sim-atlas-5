@@ -9,7 +9,7 @@ while [ -d "$ARCHIVE_DIR/run_$NEXT_NUM" ]; do
     ((NEXT_NUM++))
 done
 NEW_FOLDER="$ARCHIVE_DIR/run_$NEXT_NUM"
-
+rm -rf "$LOG_DIR"/*
 # Incast
 # cd net-sim-obm
 # python3 network.py 144-host-2-tier-fattree.json "workloads/incast-trace-100G-degree-0.2.csv.processed" 0.2 1000000
@@ -52,7 +52,7 @@ NEW_FOLDER="$ARCHIVE_DIR/run_$NEXT_NUM"
 # cp "$SWITCH_FILE" "$NEW_FOLDER/"
 
 cd net-sim-obm
-python3 network.py 144-host-2-tier-fattree.json "workloads/websearch-trace-100G-load-0.3.csv.processed" 0.3 30000
+python3 network.py 144-host-2-tier-fattree.json "workloads/websearch-trace-100G-load-0.3.csv.processed" 0.3 100000
 mkdir -p "$NEW_FOLDER"
 cd ..
 echo workloads/websearch-trace-100G-load-0.3.csv.processed >> stats_obm.txt
@@ -63,7 +63,7 @@ cp "$SWITCH_FILE" "$NEW_FOLDER/"
 
 
 cd net-sim-obm
-python3 network.py 144-host-2-tier-fattree.json "workloads/websearch-trace-100G-load-0.6.csv.processed" 0.6 30000
+python3 network.py 144-host-2-tier-fattree.json "workloads/websearch-trace-100G-load-0.6.csv.processed" 0.6 100000
 mkdir -p "$NEW_FOLDER"
 cd ..
 echo workloads/websearch-trace-100G-load-0.6.csv.processed >> stats_obm.txt
@@ -73,12 +73,12 @@ mv "$LOG_DIR/recvd-flows-0.6.txt" "$NEW_FOLDER/"
 cp "$SWITCH_FILE" "$NEW_FOLDER/"
 
 
-cd net-sim-obm
-python3 network.py 144-host-2-tier-fattree.json "workloads/websearch-trace-100G-load-0.9.csv.processed" 0.9 30000
-mkdir -p "$NEW_FOLDER"
-cd ..
-echo workloads/websearch-trace-100G-load-0.9.csv.processed >> stats_obm.txt
-python3 stats.py obm 0.9
-python3 stats.py obm 0.9 >> stats_obm.txt
-mv "$LOG_DIR/recvd-flows-0.9.txt" "$NEW_FOLDER/"
-cp "$SWITCH_FILE" "$NEW_FOLDER/"
+# cd net-sim-obm
+# python3 network.py 144-host-2-tier-fattree.json "workloads/websearch-trace-100G-load-0.9.csv.processed" 0.9 100000
+# mkdir -p "$NEW_FOLDER"
+# cd ..
+# echo workloads/websearch-trace-100G-load-0.9.csv.processed >> stats_obm.txt
+# python3 stats.py obm 0.9
+# python3 stats.py obm 0.9 >> stats_obm.txt
+# mv "$LOG_DIR/recvd-flows-0.9.txt" "$NEW_FOLDER/"
+# cp "$SWITCH_FILE" "$NEW_FOLDER/"

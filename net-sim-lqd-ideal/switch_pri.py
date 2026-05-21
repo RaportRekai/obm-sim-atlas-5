@@ -60,75 +60,43 @@ class Switch():
         self.buffer = [[-1,-1] for i in range(self.N)]
         self.priority_packet_count = [0,0,0]
         self.dropped = []
-        self.weights = [3,2,1]
-        self.current_prio_idx = {port+1: 0 for port in range(self.N)}
-        self.tokens = {port+1: self.weights[0] for port in range(self.N)}
 
     def runSwitch(self, currTimeslot):
         """Main loop of switch"""
         self.t+=1
         self.l_uni = []
         self.dropped = []
-        # Assuming self.weights = [3, 2, 1]
-# self.current_prio_idx and self.tokens should be initialized in __init__
-
-        for port in self.links.keys():
-            sent_in_this_slot = False
-            
-            # We iterate up to 'priority_classes' times to ensure work-conservation.
-            # If a queue is empty, we skip to the next within the same cycle.
-            for _ in range(self.priority_classes):
-                prio = self.current_prio_idx[port]
-                
-                # 1. Refill Logic: If current priority has no tokens left, move and refill.
-                if self.tokens[port] <= 0:
-                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
-                    prio = self.current_prio_idx[port]
-                    self.tokens[port] = self.weights[prio]
-
-                # 2. Check if the current priority queue has packets
-                if not self.queues[port][prio].empty():
-                    flag_1 = 0
-                    # Iterate through the queue to find a valid packet
-                    for j in range(self.queues[port][prio].qsize()):
-                        packet = self.queues[port][prio].get_nowait()
-                        
+        for port in self.links.keys():  # in each timeslot, send a packet
+                                        # at the head of a VOQ at each port.
+                                        # VOQs at each port are scheduled in
+                                        # round robin manner
+            flag_1 = 0
+            for i in range(self.priority_classes):
+                if not self.queues[port][i].empty():
+                    for j in range(0,self.queues[port][i].qsize()):
+                        packet = self.queues[port][i].get_nowait()
                         if packet.invalid == 0:
-                            packet.hops += 1
+                            packet.hops +=1
                             self.links[port].send(packet, self.addr, currTimeslot)
                             
-                            # Update stats
+                            # print(f"sending packet from {i} when other prioritites have length = {self.voq_port_qsize[port-1]}")
+                            # if i == 0:
+                            #     breakpoint()
                             self.port_qsize[port] -= 1
-                            self.sent += 1
-                            self.total_usage -= 1 
-                            self.voq_port_qsize[port-1][prio] -= 1
-                            
-                            # WRR: Consume token and mark slot as used
-                            self.tokens[port] -= 1
-                            sent_in_this_slot = True
+                            self.sent+=1
+                            self.total_usage-=1 
+                            self.voq_port_qsize[port-1][i]-=1
                             flag_1 = 1
                             assert(self.port_qsize[port] >= 0)
                             break
                         else:
-                            # Packet is invalid (cancelled/dropped elsewhere)
-                            self.dropped.append((packet.dstAddr, packet.srcAddr, packet.srcPort, packet.dstPort, packet.seqNum))
-                    
-                    # 3. Post-service: If queue is now empty OR tokens are hit, 
-                    # prep for the next priority in the next attempt.
-                    if self.tokens[port] <= 0 or self.queues[port][prio].empty():
-                        self.tokens[port] = 0 # Force exhaustion to trigger move
-                        self.current_prio_idx[port] = (prio + 1) % self.priority_classes
-                        # We don't refill tokens here; the check at the top of the next iteration handles it.
+                            self.dropped.append((packet.dstAddr,packet.srcAddr,packet.srcPort,packet.dstPort,packet.seqNum))
 
-                    if sent_in_this_slot:
-                        break # Move to next egress port
+                    if flag_1:
+                        break
 
                 else:
-                    # 4. WORK-CONSERVING SKIP: Queue is empty.
-                    # Reset tokens to 0 and advance pointer so we check the next prio immediately.
-                    self.tokens[port] = 0
-                    self.current_prio_idx[port] = (prio + 1) % self.priority_classes
-                    # The loop continues to the next '_' iteration.
+                    continue
         self.k = 0
         
         self.largest_index = max(self.port_qsize, key=self.port_qsize.get)
@@ -240,11 +208,6 @@ class Switch():
                 if c==target_queue.qsize(): 
                     self.flag = 1
                     break
-
-                if target_queue.queue[target_queue.qsize()-c-1].priority == 1:  
-                    #     #breakpoint()
-                    print("dropping priority 1 packets --inversion")
-                    print("total usage = ", self.total_usage)
                 target_queue.queue[target_queue.qsize()-c-1].invalid = 1
                 mem_loc.append(1)  # Log the memory location (example)
                 #self.packet_dropped+=1 
@@ -263,25 +226,18 @@ class Switch():
     def allct(self,mem):
         space = sum(mem)
         trk = 0
-        for pri in range(self.priority_classes):
-            for ind,i in enumerate(self.buffer):
-                if i[1] != -1 and i[0].priority-1 == pri:
-                    self.queues[i[1]][i[0].priority-1].put(i[0])
-                    trk +=1
-                    self.total_usage +=1
-                    self.port_qsize[i[1]] += 1
-                    #self.setECNFlag(i[0], i[1])
-                    self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
-                    self.buffer[ind] = [-1,-1]
-                if trk == space:
-                    break
+        for ind,i in enumerate(self.buffer):
+            if i[1] != -1:
+                self.queues[i[1]][i[0].priority-1].put(i[0])
+                trk +=1
+                self.total_usage +=1
+                self.port_qsize[i[1]] += 1
+                #self.setECNFlag(i[0], i[1])
+                self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
+                self.buffer[ind] = [-1,-1]
             if trk == space:
                 break
-        for i in self.buffer:
-            if i[0]!=-1:
-                if i[0].priority == 1:
-                    print("dropping priority 1 packets --no space")
-        self.buffer = [[-1,-1] for _ in range(len(self.buffer))]
+        
         
 
 ###############################################################################################################################################################
@@ -328,11 +284,12 @@ class Switch():
                  
                 # if packet.priority == 1:  
                 #     #breakpoint()
+                print("Initiated LQD")
             else:
                 self.packet_dropped+=1 
                 self.dropped.append((packet.dstAddr,packet.srcAddr,packet.srcPort,packet.dstPort,packet.seqNum)) 
-                if packet.priority == 1:  
-                    print("dropping priority 1 packets --no space and no space left in longest queue")
+                # if packet.priority == 1:  
+                #     breakpoint()
 
         
                 
