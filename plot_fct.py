@@ -38,7 +38,7 @@ ALGO_META = {
     "lqd":      ("LQD",      "#32CD32"),
     "credence": ("Credence", "#555555"),
     "occamy":   ("Occamy",   "#1E90FF"), # Added Occamy (Blue)
-    "lqd-ideal": ("LQD-Ideal", "#800080")  # Added LQD-Ideal (Purple)
+    "lqd-ideal": ("LQD-Ideal", "#8B4513")  # Added LQD-Ideal (Purple)
 }
 
 # Updated order to include Occamy and LQD-Ideal
