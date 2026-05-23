@@ -38,10 +38,11 @@ ALGO_META = {
     "lqd":      ("LQD",      "#32CD32"),
     "credence": ("Credence", "#555555"),
     "occamy":   ("Occamy",   "#1E90FF"), # Added Occamy (Blue)
+    "lqd-ideal": ("LQD-Ideal", "#800080")  # Added LQD-Ideal (Purple)
 }
 
-# Updated order to include Occamy
-ORDERED_LABELS = ["DT", "ABM", "OBM", "LQD", "Credence", "Occamy"]
+# Updated order to include Occamy and LQD-Ideal
+ORDERED_LABELS = ["DT", "ABM", "OBM", "LQD", "Credence", "Occamy", "LQD-Ideal"]
 BASELINE_LABEL = "OBM"  # normalization reference (must match an ORDERED_LABELS item)
 
 DATASET_XLABEL = {"incast": "Incast Degree", "websearch": "Network Load"}
@@ -253,7 +254,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--files", nargs="*", default=[
         "stats_dt.txt", "stats_abm.txt", "stats_obm.txt",
-        "stats_lqd.txt", "stats_credence.txt", "stats_occamy.txt"
+        "stats_lqd.txt", "stats_lqd_ideal.txt", "stats_credence.txt", "stats_occamy.txt"
     ], help="Paths to stats files (any order).")
     ap.add_argument("--outdir", default=".", help="Where to write PNGs.")
     ap.add_argument("--dpi", type=int, default=180,
@@ -270,9 +271,11 @@ def main():
             if   "dt"       in base: algo_key = "dt"
             elif "abm"      in base: algo_key = "abm"
             elif "obm"      in base: algo_key = "obm"
+            elif "lqd_ideal" in base: algo_key = "lqd-ideal"
             elif "lqd"      in base: algo_key = "lqd"
             elif "credence" in base: algo_key = "credence"
             elif "occamy"   in base: algo_key = "occamy" # Added parsing for Occamy
+
         if not algo_key:
             continue
         if not os.path.isfile(path):
