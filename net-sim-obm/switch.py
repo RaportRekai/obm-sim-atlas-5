@@ -227,24 +227,23 @@ class Switch():
                     break  # Stop if the queue becomes empty
             
             return mem_loc
-    
+        
     def allct(self,mem):
         space = sum(mem)
         trk = 0
-        for pri in range(self.priority_classes):
-            for ind,i in enumerate(self.buffer):
-                if i[1] != -1 and i[0].priority-1 == pri:
-                    self.queues[i[1]][i[0].priority-1].put(i[0])
-                    trk +=1
-                    self.total_usage +=1
-                    self.port_qsize[i[1]] += 1
-                    #self.setECNFlag(i[0], i[1])
-                    self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
-                    self.buffer[ind] = [-1,-1]
-                if trk == space:
-                    break
+       
+        for ind,i in enumerate(self.buffer):
+            if i[1] != -1:
+                self.queues[i[1]][i[0].priority-1].put(i[0])
+                trk +=1
+                self.total_usage +=1
+                self.port_qsize[i[1]] += 1
+                #self.setECNFlag(i[0], i[1])
+                self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
+                self.buffer[ind] = [-1,-1]
             if trk == space:
                 break
+        
         for i in self.buffer:
             if i[0]!=-1:
                 if i[0].priority == 1:
@@ -256,7 +255,7 @@ class Switch():
 
     def handleRecvdPacket(self, inPort, packet, arrivalTime):
         """Handle the packet received on the specified input port 'inPort'.
-           arrivalTime is the timeslot in which the packet was received"""
+        arrivalTime is the timeslot in which the packet was received"""
         outPort = self.getOutPort(self.addr, packet)  # output port the packet needs to be sent out on
         
 ################################################################################ BIT MAPPER ########################################################################################
@@ -293,7 +292,7 @@ class Switch():
             if outPort != (self.largest_index) or (enter == 1):
                 self.buffer[inPort-1] = [packet,outPort]
                 self.packet_dropped+=1
-                 
+                
                 # if packet.priority == 1:  
                 #     #breakpoint()
             else:
@@ -301,12 +300,8 @@ class Switch():
                 self.dropped.append((packet.dstAddr,packet.srcAddr,packet.srcPort,packet.dstPort,packet.seqNum)) 
                 if packet.priority == 1:  
                     print("dropping priority 1 packets --no space and no space left in longest queue")
-
-
-        
-                
-            
             
 ####################################################################################################################################################################################
                 
+                       
 
