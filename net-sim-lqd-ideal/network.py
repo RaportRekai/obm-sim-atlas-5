@@ -120,7 +120,7 @@ class Network:
         startTimeslot = int(tokens[6].strip())
         if float(logname) == 0.6:
             cwindw = 20
-            breakpoint()
+            #breakpoint()
         else:
             cwindw = 50
         eof = False

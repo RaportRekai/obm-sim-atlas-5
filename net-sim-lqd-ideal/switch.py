@@ -167,9 +167,10 @@ class Switch():
         
         return index_of_largest
 
-    def find_lowest_prio(self,prio):
-        
-        for i in range(self.priority_classes-1,prio-1,-1):
+    def find_lowest_prio(self):
+        priority_list = [self.buffer[i][0].priority for i in range(len(self.buffer)) if self.buffer[i][1] != -1]
+        prio = max(priority_list)
+        for i in range(self.priority_classes-1,prio-2,-1):
             for j in range(self.N):
                 if self.voq_port_qsize[j][i]>0:
                     return i
@@ -180,7 +181,7 @@ class Switch():
         port_ind = -1
         for i in range(len(self.port_qsize)):
             try:
-                if q_len < self.port_qsize[i+1] and self.voq_port_qsize[i][prio]>0:
+                if q_len < self.port_qsize[i+1] and self.voq_port_qsize[i][prio]>0 :
                     q_len = self.port_qsize[i+1]
                     port_ind = i+1
             except:
@@ -192,52 +193,69 @@ class Switch():
     def fetch(self):
         # find out the lowest priority queue
         mem_loc = []
+        priot = self.find_lowest_prio()
+        port = self.find_port_lowest_prio(priot)
+
         for ind,i in enumerate(self.buffer):
             if i[1] != -1:
+                
+                    if priot != -1:
 
-                # find the lowest priority among the non empty queues
-                prio = self.find_lowest_prio(i[0].priority-1)
-                if prio != -1:
+                        # find the longest port of the lowest priority
+                        # port = self.find_port_lowest_prio(prio)
+                        # if port == i[0] and port!=-1:
+                        #     port = -1
+                        #     print("packet belongs to the longest queue")
+                        # remove a packet from that queue
+                        target_queue = self.queues[port][priot]
+                        if port != -1:
+                            if not target_queue.empty():
+                                c=0
 
-                    # find the longest port of the lowest priority
-                    port = self.find_port_lowest_prio(prio)
+                                if self.flag == 1:
+                                    if self.buffer[ind][0].priority == 1:
+                                        print("Unfortunately Dropping priority 1 packet")
+                                    #self.buffer[ind] = [-1,-1]
+                                
+                                while target_queue.queue[target_queue.qsize()-c-1].invalid ==1 and c!=target_queue.qsize():
+                                    c+=1
+                                
+                                if c==target_queue.qsize(): 
+                                    self.flag = 1
+                                    break
+                                
+                                target_queue.queue[target_queue.qsize()-c-1].invalid = 1
 
-                    # remove a packet from that queue
-                    target_queue = self.queues[port][prio]
-                    if port != -1:
-                        if not target_queue.empty():
-                            c=0
-                            while target_queue.queue[target_queue.qsize()-c-1].invalid ==1 and c!=target_queue.qsize():
-                                c+=1
-                            if c==target_queue.qsize(): 
-                                self.flag = 1
-                                break
-                            target_queue.queue[target_queue.qsize()-c-1].invalid = 1
-
-                            if target_queue.queue[target_queue.qsize()-c-1].priority == 1:  
-                            #     #breakpoint()
-                                print("dropping priority 1 packets --inversion")
-                                print("total usage = ", self.total_usage)
-                            
-                            mem_loc.append(1)
-                            self.port_qsize[port] -= 1
-                            self.voq_port_qsize[port-1][prio] -= 1
-                            self.total_usage -= 1 
+                                if target_queue.queue[target_queue.qsize()-c-1].priority == 1:  
+                                #     #breakpoint()
+                                    print("dropping priority 1 packets --inversion")
+                                    print("total usage = ", self.total_usage)
+                                
+                                mem_loc.append(1)
+                                self.port_qsize[port] -= 1
+                                self.voq_port_qsize[port-1][priot] -= 1
+                                self.total_usage -= 1
+                                
+                            else:
+                                print("critical error: target queue empty when trying to fetch for LQD")
+                                breakpoint()
                         else:
-                            print("critical error: target queue empty when trying to fetch for LQD")
-                            breakpoint()
+                            if i[0].priority == 1:  
+                                breakpoint()
+                                print("dropping priority 1 packets -- couldnt find a port with lesser prio")
+                                print("total usage = ", self.total_usage)
+                            self.buffer[ind] = [-1,-1]            
                     else:
                         if i[0].priority == 1:  
-                        #     #breakpoint()
-                            print("dropping priority 1 packets -- couldnt find a port with lesser prio")
+                            print("dropping priority 1 packets -- no lesser prio found for drop")
+                           # breakpoint()
                             print("total usage = ", self.total_usage)
-                        self.buffer[ind] = [-1,-1]            
-                else:
-                    if i[0].priority == 1:  
-                    #     #breakpoint()
-                        print("dropping priority 1 packets -- no lesser prio found for drop")
-                        print("total usage = ", self.total_usage)
-                    self.buffer[ind] = [-1,-1]
+                        self.buffer[ind] = [-1,-1]
+        
+        if self.flag == 1:
+            #print("Unfortunately some packets were dropped due to lack of space in longest queue")
+            self.flag = 0
+        
         return mem_loc
                 
 
@@ -245,17 +263,23 @@ class Switch():
     def allct(self,mem):
         space = sum(mem)
         trk = 0
+        #for prio in range(self.priority_classes):
         for ind,i in enumerate(self.buffer):
             if i[1] != -1:
-                self.queues[i[1]][i[0].priority-1].put(i[0])
-                trk +=1
-                self.total_usage +=1
-                self.port_qsize[i[1]] += 1
-                #self.setECNFlag(i[0], i[1])
-                self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
-                self.buffer[ind] = [-1,-1]
+                    self.queues[i[1]][i[0].priority-1].put(i[0])
+                    trk +=1
+                    self.total_usage +=1
+                    self.port_qsize[i[1]] += 1
+                    #self.setECNFlag(i[0], i[1])
+                    self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
+                    self.buffer[ind] = [-1,-1]
             if trk == space:
                 break
+            # if trk == space:
+            #     break
+        
+        for i in range(len(self.buffer)):
+            self.buffer[i] = [-1,-1]
         
         
 
