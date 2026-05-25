@@ -67,7 +67,7 @@ p99.9 FCT long flows: 3717.179us
 Total recv throughput (short, n=50): 416.05 Gbps
 Average recv throughput (short): 8.321 Gbps
 Total recv throughput (long, n=34): 1286.31 Gbps
-Average recv throughput (long): 37.8326 Gbps
+Average recv throughput (long): 39.8326 Gbps
 workloads/incast-trace-100G-degree-0.6.csv.processed
 Average FCT short flows: 16.33us
 p99 FCT short flows: 20.189us
