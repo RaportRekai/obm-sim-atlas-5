@@ -266,3 +266,6 @@ drop count = 1705
 drop count = 1386
 drop count = 1217
 drop count = 729
+drop count = 2168
+drop count = 1648
+drop count = 940

@@ -17,7 +17,7 @@ class Packet:
         self.sendTimeslot  = 0 
         self.hops = 0
         self.priority = 0
-
+        self.prvt = 0
         """Simulator fileds. DO NOT TOUCH"""
         self.timeslotToDeq = None
         self.node = None

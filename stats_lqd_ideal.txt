@@ -90,3 +90,850 @@ Total recv throughput (short, n=80): 759.58 Gbps
 Average recv throughput (short): 9.4947 Gbps
 Total recv throughput (long, n=20): 741.07 Gbps
 Average recv throughput (long): 37.0535 Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: 11.617us
+p99 FCT short flows: 14.61us
+p99.9 FCT short flows: 14.637us
+Average FCT long flows: 1057.425us
+p99 FCT long flows: 1591.914us
+p99.9 FCT long flows: 1614.383us
+Total recv throughput (short, n=26): 273.56 Gbps
+Average recv throughput (short): 10.5215 Gbps
+Total recv throughput (long, n=16): 974.55 Gbps
+Average recv throughput (long): 60.9094 Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: 15.336us
+p99 FCT short flows: 20.64us
+p99.9 FCT short flows: 20.64us
+Average FCT long flows: 2105.051us
+p99 FCT long flows: 3687.842us
+p99.9 FCT long flows: 3720.132us
+Total recv throughput (short, n=100): 832.1 Gbps
+Average recv throughput (short): 8.321 Gbps
+Total recv throughput (long, n=34): 1271.75 Gbps
+Average recv throughput (long): 37.4044 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 25.855us
+p99 FCT short flows: 20.189us
+p99.9 FCT short flows: 127.422us
+Average FCT long flows: 2053.864us
+p99 FCT long flows: 4002.828us
+p99.9 FCT long flows: 4296.014us
+Total recv throughput (short, n=74): 547.0 Gbps
+Average recv throughput (short): 7.0 Gbps
+Total recv throughput (long, n=34): 1346.0 Gbps
+Average recv throughput (long): 40.0 Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: 12.832us
+p99 FCT short flows: 14.64us
+p99.9 FCT short flows: 14.64us
+Average FCT long flows: 3094.59us
+p99 FCT long flows: 5500.808us
+p99.9 FCT long flows: 5514.085us
+Total recv throughput (short, n=80): 759.58 Gbps
+Average recv throughput (short): 9.4947 Gbps
+Total recv throughput (long, n=20): 740.21 Gbps
+Average recv throughput (long): 37.0105 Gbps
