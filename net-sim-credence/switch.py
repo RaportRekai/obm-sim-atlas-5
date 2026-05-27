@@ -29,7 +29,7 @@ class Switch():
         self.links = {}
         self.queues = {}
         self.voq_rr = {}
-        self.per_port_max_qsize = 5
+        self.per_port_max_qsize = 4
         self.K = 25 # ECN Threshold
 
         self.num_tor_ports = num_tor_ports
@@ -58,11 +58,13 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize * num_tor_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
+            self.per_port_buffer = [0 for _ in range(self.ports)]
         elif self.addr[0] == 'a':
             self.ports = num_agg_ports
             self.total_buffer_size = self.per_port_max_qsize * num_agg_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
+            self.per_port_buffer = [0 for _ in range(self.ports)]
 
         # Initialize tracking dicts
         for i in range(1, self.N + 1):
@@ -138,24 +140,35 @@ class Switch():
                     for j in range(0, self.queues[port][i].qsize()):
                         packet = self.queues[port][i].get_nowait()
                         if packet.invalid == 0:
+                            packet.hops +=1
+                            if packet.prvt == 1:
+                                if self.per_port_buffer[port-1]==1:
+                                    self.per_port_buffer[port-1] = 0
+                                else:
+                                    breakpoint()
+                            else:
+                                if self.port_qsize[port] <=0:
+                                    breakpoint()
+                                self.port_qsize[port] -= 1
+                                self.total_usage-=1 
+                                self.voq_port_qsize[port-1][i]-=1
                             
-                            # --- SWIFT MODIFICATION START ---
-                            # Increment hop count before sending
-                            packet.hops += 1
-                            # --- SWIFT MODIFICATION END ---
                             
+
+                            packet.prvt = 0
                             self.links[port].send(packet, self.addr, currTimeslot)
+                            # print(f"sending packet from {i} when other prioritites have length = {self.voq_port_qsize[port-1]}")
+                            # if i == 0:
+                            #     breakpoint()
                             
-                            self.port_qsize[port] -= 1
-                            self.sent += 1
-                            self.total_usage -= 1 
-                            self.voq_port_qsize[port-1][i] -= 1
-                            
-                            # [CREDENCE HOOK] Update Virtual LQD on departure
-                            self._update_virtual_lqd(port, 'departure')
+                            self.sent+=1
                             
                             flag_1 = 1
-                            assert(self.port_qsize[port] >= 0)
+                            try:
+                                assert(self.port_qsize[port] >= 0)
+                            except AssertionError:
+                                print(f"Port {port} has negative queue size")
+                                breakpoint()
                             break
                     if flag_1:
                         break
@@ -195,63 +208,69 @@ class Switch():
         Handle the packet received using CREDENCE logic.
         """
         outPort = self.getOutPort(self.addr, packet)
-        
-        # 1. Update Virtual Thresholds
-        self._update_virtual_lqd(outPort, 'arrival')
-        
-        # 2. Update Stats
-        self._update_ewma(outPort)
-        
-        decision = "DROP"
-        
-        # --- CREDENCE LOGIC START ---
-        
-        # Safeguard Condition
-        longest_queue_len = 0
-        if len(self.port_qsize) > 0:
-            longest_queue_len = max(self.port_qsize.values())
-
-        safeguard_threshold = self.total_buffer_size / self.N
-        
-        if longest_queue_len < safeguard_threshold:
-            decision = "ACCEPT"
+        if self.per_port_buffer[outPort-1] == 0:
+            self.per_port_buffer[outPort-1] = 1
+            # we have to introduce a new field for packet.py
+            packet.prvt = 1
+            self.queues[outPort][packet.priority-1].put(packet)
         else:
-            # Threshold Check
-            current_q_len = self.port_qsize.get(outPort, 0)
-            virtual_threshold = self.virtual_T[outPort]
+        
+            # 1. Update Virtual Thresholds
+            self._update_virtual_lqd(outPort, 'arrival')
             
-            if current_q_len < virtual_threshold:
-                if self.total_usage < self.total_buffer_size:
-                    # ML Prediction
-                    if self.model:
-                        prediction = self.model.predict(
-                            current_q_len, 
-                            self.total_usage, 
-                            self.avg_q_len[outPort], 
-                            self.avg_shared_occ
-                        )
-                        if prediction == 0:
-                            decision = "ACCEPT"
-                        else:
-                            decision = "DROP"
-                    else:
-                        # Fallback if model failed to load
-                        decision = "ACCEPT"
-                else:
-                    decision = "DROP" # Physically full
+            # 2. Update Stats
+            self._update_ewma(outPort)
+            
+            decision = "DROP"
+            
+            # --- CREDENCE LOGIC START ---
+            
+            # Safeguard Condition
+            longest_queue_len = 0
+            if len(self.port_qsize) > 0:
+                longest_queue_len = max(self.port_qsize.values())
+
+            safeguard_threshold = self.total_buffer_size / self.N
+            
+            if longest_queue_len < safeguard_threshold:
+                decision = "ACCEPT"
             else:
-                decision = "DROP" # Exceeds virtual threshold
+                # Threshold Check
+                current_q_len = self.port_qsize.get(outPort, 0)
+                virtual_threshold = self.virtual_T[outPort]
                 
-        # --- EXECUTE DECISION ---
-        if decision == "ACCEPT":
-            if self.total_usage < self.total_buffer_size:
-                inPort_priority = packet.priority
-                self.total_usage += 1
-                self.queues[outPort][inPort_priority-1].put(packet)
-                self.port_qsize[outPort] += 1
-                self.voq_port_qsize[outPort-1][inPort_priority-1] += 1
-                self.setECNFlag(packet, outPort)
+                if current_q_len < virtual_threshold:
+                    if self.total_usage < self.total_buffer_size:
+                        # ML Prediction
+                        if self.model:
+                            prediction = self.model.predict(
+                                current_q_len, 
+                                self.total_usage, 
+                                self.avg_q_len[outPort], 
+                                self.avg_shared_occ
+                            )
+                            if prediction == 0:
+                                decision = "ACCEPT"
+                            else:
+                                decision = "DROP"
+                        else:
+                            # Fallback if model failed to load
+                            decision = "ACCEPT"
+                    else:
+                        decision = "DROP" # Physically full
+                else:
+                    decision = "DROP" # Exceeds virtual threshold
+                    
+            # --- EXECUTE DECISION ---
+            if decision == "ACCEPT":
+                if self.total_usage < self.total_buffer_size:
+                    inPort_priority = packet.priority
+                    self.total_usage += 1
+                    self.queues[outPort][inPort_priority-1].put(packet)
+                    self.port_qsize[outPort] += 1
+                    self.voq_port_qsize[outPort-1][inPort_priority-1] += 1
+                    self.setECNFlag(packet, outPort)
+                else:
+                    self.packet_dropped += 1
             else:
                 self.packet_dropped += 1
-        else:
-            self.packet_dropped += 1

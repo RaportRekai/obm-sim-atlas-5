@@ -18,7 +18,7 @@ class Switch():
         self.links = {}   # links indexed by port
         self.queues = {}  # list of virtual output queues per port
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 5  # in terms of number of size in Bytes
+        self.per_port_max_qsize = 4  # in terms of number of size in Bytes
         self.K = 4                   # threshold for ECN marking
 
         self.num_tor_ports = num_tor_ports
@@ -38,12 +38,14 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize*num_tor_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
+            self.per_port_buffer = [0 for _ in range(self.ports)]
             print(num_tor_ports)
         elif self.addr[0] == 'a':
             self.ports = num_agg_ports
             self.total_buffer_size = self.per_port_max_qsize*num_agg_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range (self.N)]
+            self.per_port_buffer = [0 for _ in range(self.ports)]
             print(num_agg_ports)
             
 
@@ -98,7 +100,7 @@ class Switch():
                             head_packet = pq.queue[0]
                             
                             # Only drop if not already dropped
-                            if head_packet.invalid == 0:
+                            if head_packet.invalid == 0 and head_packet.prvt == 0:
                                 head_packet.invalid = 1 
                                 
                                 # Decrement usage counters immediately so space is "freed"
@@ -137,17 +139,36 @@ class Switch():
                         
                         # VALID PACKET FOUND
                         else:
-                            packet.hops += 1
-                            self.links[port].send(packet, self.addr, currTimeslot)
+                            packet.hops +=1
+                            if packet.prvt == 1:
+                                if self.per_port_buffer[port-1]==1:
+                                    self.per_port_buffer[port-1] = 0
+                                else:
+                                    breakpoint()
+                            else:
+                                if self.port_qsize[port] <=0:
+                                    breakpoint()
+                                self.port_qsize[port] -= 1
+                                self.total_usage-=1 
+                                self.voq_port_qsize[port-1][i]-=1
                             
-                            self.port_qsize[port] -= 1
-                            self.sent += 1
-                            self.total_usage -= 1 
-                            self.voq_port_qsize[port-1][i] -= 1
+                            
+
+                            packet.prvt = 0
+                            self.links[port].send(packet, self.addr, currTimeslot)
+                            # print(f"sending packet from {i} when other prioritites have length = {self.voq_port_qsize[port-1]}")
+                            # if i == 0:
+                            #     breakpoint()
+                            
+                            self.sent+=1
                             
                             flag_1 = 1
-                            assert(self.port_qsize[port] >= 0)
-                            break # Break the while loop (packet sent)
+                            try:
+                                assert(self.port_qsize[port] >= 0)
+                            except AssertionError:
+                                print(f"Port {port} has negative queue size")
+                                breakpoint()
+                            break
                     
                     if flag_1:
                         break # Break the priority loop (one packet sent per port per timeslot)
@@ -205,7 +226,13 @@ class Switch():
         outPort = self.getOutPort(self.addr, packet)
         
         # Check Global Buffer Space
-        if self.total_buffer_size > self.total_usage:
+        if self.per_port_buffer[outPort-1] == 0:
+            self.per_port_buffer[outPort-1] = 1
+            # we have to introduce a new field for packet.py
+            packet.prvt = 1
+            self.queues[outPort][packet.priority-1].put(packet)
+
+        elif self.total_buffer_size > self.total_usage:
             
             # Map packet priority to VOQ index
             # Warning: Assuming packet.priority is 0, 1, or 2 based on your code's logic

@@ -21,7 +21,7 @@ class Switch():
                           # indexed by port, i.e., {port:[queue], ......, port:[queue]}
                           # each virtual output queue is a FIFO queue of infinite size
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 5  # in terms of number of 1500B packets
+        self.per_port_max_qsize = 4  # in terms of number of 1500B packets
         self.K = 4                   # threshold for ECN marking (in terms of number of packets)
 
         self.num_tor_ports = num_tor_ports
@@ -40,6 +40,7 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize*num_tor_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
+            self.per_port_buffer = [0 for _ in range(self.ports)]
             print(num_tor_ports)
         elif self.addr[0] == 'a':
             self.K = 4
@@ -47,6 +48,7 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize*num_agg_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range (self.N)]
+            self.per_port_buffer = [0 for _ in range(self.ports)]
             print(num_agg_ports)
             
 
@@ -76,19 +78,35 @@ class Switch():
                     for j in range(0,self.queues[port][i].qsize()):
                         packet = self.queues[port][i].get_nowait()
                         if packet.invalid == 0:
-                            packet.hops+=1
-                            self.bwu[port-1][packet.priority-1] += 1
+                            packet.hops +=1
+                            if packet.prvt == 1:
+                                if self.per_port_buffer[port-1]==1:
+                                    self.per_port_buffer[port-1] = 0
+                                else:
+                                    breakpoint()
+                            else:
+                                if self.port_qsize[port] <=0:
+                                    breakpoint()
+                                self.port_qsize[port] -= 1
+                                self.total_usage-=1 
+                                self.voq_port_qsize[port-1][i]-=1
+                            
+                            
+
+                            packet.prvt = 0
                             self.links[port].send(packet, self.addr, currTimeslot)
                             # print(f"sending packet from {i} when other prioritites have length = {self.voq_port_qsize[port-1]}")
                             # if i == 0:
                             #     breakpoint()
                             
-                            self.port_qsize[port] -= 1
                             self.sent+=1
-                            self.total_usage-=1 
-                            self.voq_port_qsize[port-1][i]-=1
+                            
                             flag_1 = 1
-                            assert(self.port_qsize[port] >= 0)
+                            try:
+                                assert(self.port_qsize[port] >= 0)
+                            except AssertionError:
+                                print(f"Port {port} has negative queue size")
+                                breakpoint()
                             break
 
                     if flag_1:
@@ -174,9 +192,15 @@ class Switch():
         """Handle the packet received on the specified input port 'inPort'.
            arrivalTime is the timeslot in which the packet was received"""
         outPort = self.getOutPort(self.addr, packet)  # output port the packet needs to be sent out on
+
+        if self.per_port_buffer[outPort-1] == 0:
+            self.per_port_buffer[outPort-1] = 1
+            # we have to introduce a new field for packet.py
+            packet.prvt = 1
+            self.queues[outPort][packet.priority-1].put(packet)
         
 ################################################################################ BIT MAPPER ########################################################################################
-        if self.total_buffer_size > self.total_usage:
+        elif self.total_buffer_size > self.total_usage:
             
             # self.queues[outPort][inPort-1].put(packet)  # add packet to the right VOQ at the output port
             # self.queues have their keys same as the keys for the links but the sublist has its index starting from 0, so does self.port_qsize (first index only)
