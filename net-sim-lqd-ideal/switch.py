@@ -38,7 +38,7 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize*num_tor_ports
             self.N = 1 if num_tor_ports < 1 else 2 ** ((num_tor_ports - 1).bit_length())
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
             print(num_tor_ports)
         elif self.addr[0] == 'a':
             self.K = 4
@@ -46,7 +46,7 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize*num_agg_ports
             self.N = 1 if num_agg_ports < 1 else 2 ** ((num_agg_ports - 1).bit_length())
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range (self.N)]
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
             print(num_agg_ports)
             
 
@@ -80,8 +80,8 @@ class Switch():
                         if packet.invalid == 0:
                             packet.hops +=1
                             if packet.prvt == 1:
-                                if self.per_port_buffer[port-1]==1:
-                                    self.per_port_buffer[port-1] = 0
+                                if self.per_port_buffer[port-1][i]==1:
+                                    self.per_port_buffer[port-1][i] = 0
                                 else:
                                     breakpoint()
                             else:
@@ -312,8 +312,8 @@ class Switch():
            arrivalTime is the timeslot in which the packet was received"""
         outPort = self.getOutPort(self.addr, packet)  # output port the packet needs to be sent out on
 
-        if self.per_port_buffer[outPort-1] == 0:
-            self.per_port_buffer[outPort-1] = 1
+        if self.per_port_buffer[outPort-1][packet.priority-1] == 0:
+            self.per_port_buffer[outPort-1][packet.priority-1] = 1
             # we have to introduce a new field for packet.py
             packet.prvt = 1
             self.queues[outPort][packet.priority-1].put(packet)
