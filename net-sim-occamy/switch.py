@@ -18,7 +18,7 @@ class Switch():
         self.links = {}   # links indexed by port
         self.queues = {}  # list of virtual output queues per port
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 4  # in terms of number of size in Bytes
+        self.per_port_max_qsize = 3  # in terms of number of size in Bytes
         self.K = 4                   # threshold for ECN marking
 
         self.num_tor_ports = num_tor_ports
@@ -54,7 +54,7 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [self.total_buffer_size/(self.ports*self.priority_classes) for i in range(self.priority_classes)]
         self.sent = 0
-        self.alpha_set = [[20,15,10],[8,6,4],[8,6,4]]
+        self.alpha_set = [[8,2,1],[8,6,4],[8,6,4]]
         self.alpha = self.alpha_set[int(load/0.3) -1] 
         self.t = 0
         self.track = 0

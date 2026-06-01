@@ -1,5 +1,7 @@
 parent=/home/dan/LQD/obm-sim/obm-sim/net-sim-lqd/training_logs
-directory_list=(0.2 0.4 0.62 0.8)
+#directory_list=(0.2 0.4 0.62 0.8)
+rm -rf $parent/*.joblib
+directory_list=(0.3 0.6 0.9)
 maxDepth=4
 regex_agg='_a[^_]*\.csv$'
 regex_tor='_t[^_]*\.csv$'

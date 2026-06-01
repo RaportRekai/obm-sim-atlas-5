@@ -204,6 +204,17 @@ class Network:
                                     _, ne, seq = item
                                 f.write(f"{h},{src},{dst},{sport},{dport},{ne},{seq},{pri}\n")
                     f.write("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
+                for switch in self.switches:
+                    file = os.path.join(f"./training_logs/{sys.argv[3]}",f"training_data_{self.switches[switch].addr}.csv")
+                    dir_path = f"./training_logs/{sys.argv[3]}"
+
+                    for name in os.listdir(dir_path):
+                        rmv = os.path.join(dir_path, name)
+                        try:
+                            os.remove(rmv)
+                        except:
+                            breakpoint()
+                    self.switches[switch].export_training_data(filename=file)
                 with open("drop_events_obm.txt", "w", encoding="utf-8") as f:
                     for (dst, src, sport, dport), seqs in self.dropped.items():
                         f.write(f"{src},{dst},{sport},{dport}," + ",".join(map(str, seqs)) + "\n")
@@ -235,6 +246,17 @@ class Network:
                                 _, ne, seq = item
                             f.write(f"{h},{src},{dst},{sport},{dport},{ne},{seq},{pri}\n")
                 f.write("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
+            for switch in self.switches:
+                    file = os.path.join(f"./training_logs/{sys.argv[3]}",f"training_data_{self.switches[switch].addr}.csv")
+                    dir_path = f"./training_logs/{sys.argv[3]}"
+
+                    for name in os.listdir(dir_path):
+                        rmv = os.path.join(dir_path, name)
+                        try:
+                            os.remove(rmv)
+                        except:
+                            breakpoint()
+                    self.switches[switch].export_training_data(filename=file)
             with open("drop_events_obm.txt", "w", encoding="utf-8") as f:
                     for (dst, src, sport, dport), seqs in self.dropped.items():
                         f.write(f"{src},{dst},{sport},{dport}," + ",".join(map(str, seqs)) + "\n")

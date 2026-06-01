@@ -29,7 +29,7 @@ class Switch():
         self.links = {}
         self.queues = {}
         self.voq_rr = {}
-        self.per_port_max_qsize = 4
+        self.per_port_max_qsize = 3
         self.K = 25 # ECN Threshold
 
         self.num_tor_ports = num_tor_ports

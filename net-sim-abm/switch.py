@@ -13,7 +13,7 @@ PACKET_SIZE = 1500
 class Switch():
     """Switch class"""
 
-    def __init__(self, addr, num_tor_ports, num_agg_ports, hosts_per_rack):
+    def __init__(self, addr, num_tor_ports, num_agg_ports, hosts_per_rack,ld):
         """Initialize parameters"""
         self.addr = addr  # address of switch
         self.links = {}   # links indexed by port, i.e., {port:link, ......, port:link}
@@ -21,7 +21,7 @@ class Switch():
                           # indexed by port, i.e., {port:[queue], ......, port:[queue]}
                           # each virtual output queue is a FIFO queue of infinite size
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 4  # in terms of number of 1500B packets
+        self.per_port_max_qsize = 3  # in terms of number of 1500B packets
         self.K = 4                   # threshold for ECN marking (in terms of number of packets)
 
         self.num_tor_ports = num_tor_ports
@@ -32,6 +32,7 @@ class Switch():
         self.packet_dropped = 0
         self.port_qsize = {}  # number of packets queued per port
         self.priority_classes = 3
+        self.l = int((float(ld)/0.3)-1)
         
         
         if self.addr[0] == 't':
@@ -57,7 +58,7 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [[self.total_buffer_size/(self.ports*self.priority_classes) for _ in range(self.priority_classes)] for i in range(self.ports)]
         self.sent = 0
-        self.alpha = [20,15,10]#[0.8,0.6,0.4]
+        self.alpha = [[20,15,10],[20,15,10],[30,25,20]]#[0.8,0.6,0.4]
         self.t = 0
         self.t_track = 0
         self.np = [0]*self.priority_classes
@@ -179,9 +180,9 @@ class Switch():
 
             for n2 in range(self.priority_classes):
                 if self.np[n2]==0:
-                    self.T[n1][n2]= self.alpha[n2]*(self.total_buffer_size - self.total_usage)*(self.nqa[n1][n2])
+                    self.T[n1][n2]= self.alpha[self.l][n2]*(self.total_buffer_size - self.total_usage)*(self.nqa[n1][n2])
                 else:
-                    self.T[n1][n2]= self.alpha[n2]*(self.total_buffer_size - self.total_usage)*(1/self.np[n2])*(self.nqa[n1][n2])
+                    self.T[n1][n2]= self.alpha[self.l][n2]*(self.total_buffer_size - self.total_usage)*(1/self.np[n2])*(self.nqa[n1][n2])
         
     
  

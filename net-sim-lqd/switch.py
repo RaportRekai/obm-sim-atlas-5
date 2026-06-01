@@ -17,7 +17,7 @@ class Switch():
         self.links = {}   # links indexed by port
         self.queues = {}  # list of virtual output queues per port
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 4  # in terms of number of 1500B packets
+        self.per_port_max_qsize = 3  # in terms of number of 1500B packets
         self.K = 4                   # threshold for ECN marking
         self.flag = 0
         self.num_tor_ports = num_tor_ports

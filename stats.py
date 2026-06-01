@@ -4,9 +4,9 @@ import numpy as np
 # Usage: python script.py <algo> <wkld>
 algo = sys.argv[1]
 wkld = sys.argv[2]
-#folder = sys.argv[3]
-#path = f'net-sim-{algo}/prev_logs/{folder}/recvd-flows-{wkld}.txt'
-path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
+folder = sys.argv[3]
+path = f'net-sim-{algo}/prev_logs/all_logs/{folder}/recvd-flows-{wkld}.txt'
+#path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
 # Helpers
 def next_token_value(tokens, key_with_colon):
     # find "flowsize:", "fct:", "recvtput:" and return the very next token (comma stripped)
