@@ -183,6 +183,7 @@ class Network:
                 sys.stdout.write("current timeslot: " + str(currTimeslot) + " total packets sent: " + str(totalPktSent[0]) + " total packets received: " + str(totalPktRecvd[0]) + " total flows finished: " + str(totalFlowsFinished[0]) + "\n")
                 sys.stdout.write("Ending simulation as all flows have finished.\n")
                 nwTput = (totalPktRecvd[0] * 1500 * 8.0) / (currTimeslot * 120.0)  # Assuming 100G link and 1500B packets
+                
                 sys.stdout.write("Network throughput (assuming 100G link and 1500B pkt): " + str(round(nwTput,3)) + "Gbps\n")
                 with open("reordering_abm_per_flow.txt", "a", encoding="utf-8") as f:
                     for h, events_by_flow in self.reordering_pairs.items():
@@ -205,6 +206,7 @@ class Network:
             sys.stdout.write("Ending simulation as end timeslot reached.\n")
             nwTput = (totalPktRecvd[0] * 1500 * 8.0) / (currTimeslot * 120.0)  # Assuming 100G link and 1500B packets
             sys.stdout.write("Network throughput (assuming 100G link and 1500B pkt): " + str(round(nwTput,3)) + "Gbps\n")
+            
             with open("reordering_abm_per_flow.txt", "a", encoding="utf-8") as f:
                     for h, events_by_flow in self.reordering_pairs.items():
                         for (dst, src, dport, sport), pairs in events_by_flow.items():

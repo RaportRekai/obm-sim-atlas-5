@@ -108,3 +108,223 @@ Total recv throughput (short, n=3): 37.0 Gbps
 Average recv throughput (short): 12.3333 Gbps
 Total recv throughput (long, n=0): 0.0 Gbps
 Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: nanus
+p99 FCT short flows: nanus
+p99.9 FCT short flows: nanus
+Average FCT long flows: nanus
+p99 FCT long flows: nanus
+p99.9 FCT long flows: nanus
+Total recv throughput (short, n=0): 0.0 Gbps
+Average recv throughput (short): nan Gbps
+Total recv throughput (long, n=0): 0.0 Gbps
+Average recv throughput (long): nan Gbps
+workloads/incast-trace-100G-degree-0.2.csv.processed
+Average FCT short flows: 112.145us
+p99 FCT short flows: 128.37us
+p99.9 FCT short flows: 128.397us
+Average FCT long flows: 1894.035us
+p99 FCT long flows: 4321.234us
+p99.9 FCT long flows: 4509.123us
+Total recv throughput (short, n=26): 61.64 Gbps
+Average recv throughput (short): 2.3708 Gbps
+Total recv throughput (long, n=32): 1313.48 Gbps
+Average recv throughput (long): 52.0463 Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: 135.734us
+p99 FCT short flows: 246.242us
+p99.9 FCT short flows: 246.348us
+Average FCT long flows: 2113.606us
+p99 FCT long flows: 4107.734us
+p99.9 FCT long flows: 4116.145us
+Total recv throughput (short, n=50): 121.21 Gbps
+Average recv throughput (short): 2.4242 Gbps
+Total recv throughput (long, n=34): 1242.58 Gbps
+Average recv throughput (long): 36.5465 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 143.906us
+p99 FCT short flows: 243.36us
+p99.9 FCT short flows: 247.996us
+Average FCT long flows: 2154.738us
+p99 FCT long flows: 3304.865us
+p99.9 FCT long flows: 4630.107us
+Total recv throughput (short, n=74): 131.0 Gbps
+Average recv throughput (short): 2.0 Gbps
+Total recv throughput (long, n=34): 1255.0 Gbps
+Average recv throughput (long): 37.0 Gbps
+workloads/incast-trace-100G-degree-0.8.csv.processed
+Average FCT short flows: 109.281us
+p99 FCT short flows: 129.24us
+p99.9 FCT short flows: 129.24us
+Average FCT long flows: 3310.608us
+p99 FCT long flows: 6294.278us
+p99.9 FCT long flows: 6322.432us
+Total recv throughput (short, n=80): 216.84 Gbps
+Average recv throughput (short): 2.7105 Gbps
+Total recv throughput (long, n=20): 727.17 Gbps
+Average recv throughput (long): 36.3585 Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: 171.389us
+p99 FCT short flows: 363.661us
+p99.9 FCT short flows: 363.714us
+Average FCT long flows: 2068.242us
+p99 FCT long flows: 4279.074us
+p99.9 FCT long flows: 4324.871us
+Total recv throughput (short, n=50): 120.7 Gbps
+Average recv throughput (short): 2.414 Gbps
+Total recv throughput (long, n=34): 1287.6 Gbps
+Average recv throughput (long): 37.8706 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 96.722us
+p99 FCT short flows: 129.094us
+p99.9 FCT short flows: 244.062us
+Average FCT long flows: 2121.24us
+p99 FCT long flows: 4143.758us
+p99.9 FCT long flows: 4529.783us
+Total recv throughput (short, n=74): 306.0 Gbps
+Average recv throughput (short): 4.0 Gbps
+Total recv throughput (long, n=34): 1306.0 Gbps
+Average recv throughput (long): 38.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 96.722us
+p99 FCT short flows: 129.094us
+p99.9 FCT short flows: 244.062us
+Average FCT long flows: 2121.24us
+p99 FCT long flows: 4143.758us
+p99.9 FCT long flows: 4529.783us
+Total recv throughput (short, n=74): 306.0 Gbps
+Average recv throughput (short): 4.0 Gbps
+Total recv throughput (long, n=34): 1306.0 Gbps
+Average recv throughput (long): 38.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 96.722us
+p99 FCT short flows: 129.094us
+p99.9 FCT short flows: 244.062us
+Average FCT long flows: 2121.24us
+p99 FCT long flows: 4143.758us
+p99.9 FCT long flows: 4529.783us
+Total recv throughput (short, n=74): 306.0 Gbps
+Average recv throughput (short): 4.0 Gbps
+Total recv throughput (long, n=34): 1306.0 Gbps
+Average recv throughput (long): 38.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 143.789us
+p99 FCT short flows: 243.814us
+p99.9 FCT short flows: 248.33us
+Average FCT long flows: 2153.912us
+p99 FCT long flows: 4104.535us
+p99.9 FCT long flows: 4557.147us
+Total recv throughput (short, n=74): 141.0 Gbps
+Average recv throughput (short): 2.0 Gbps
+Total recv throughput (long, n=34): 1276.0 Gbps
+Average recv throughput (long): 38.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 98.236us
+p99 FCT short flows: 129.149us
+p99.9 FCT short flows: 235.061us
+Average FCT long flows: 2327.795us
+p99 FCT long flows: 4195.987us
+p99.9 FCT long flows: 4511.385us
+Total recv throughput (short, n=74): 275.0 Gbps
+Average recv throughput (short): 4.0 Gbps
+Total recv throughput (long, n=34): 1181.0 Gbps
+Average recv throughput (long): 35.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 93.175us
+p99 FCT short flows: 127.774us
+p99.9 FCT short flows: 129.711us
+Average FCT long flows: 2144.972us
+p99 FCT long flows: 4171.07us
+p99.9 FCT long flows: 4557.03us
+Total recv throughput (short, n=74): 288.0 Gbps
+Average recv throughput (short): 4.0 Gbps
+Total recv throughput (long, n=34): 1286.0 Gbps
+Average recv throughput (long): 38.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 181.197us
+p99 FCT short flows: 246.401us
+p99.9 FCT short flows: 250.241us
+Average FCT long flows: 2231.449us
+p99 FCT long flows: 3797.213us
+p99.9 FCT long flows: 5129.14us
+Total recv throughput (short, n=74): 120.0 Gbps
+Average recv throughput (short): 2.0 Gbps
+Total recv throughput (long, n=34): 1248.0 Gbps
+Average recv throughput (long): 37.0 Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: 90.026us
+p99 FCT short flows: 130.92us
+p99.9 FCT short flows: 131.874us
+Average FCT long flows: 2090.298us
+p99 FCT long flows: 3392.3us
+p99.9 FCT long flows: 3876.647us
+Total recv throughput (short, n=50): 225.0 Gbps
+Average recv throughput (short): 5.0 Gbps
+Total recv throughput (long, n=34): 1256.0 Gbps
+Average recv throughput (long): 37.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 181.197us
+p99 FCT short flows: 245.88us
+p99.9 FCT short flows: 250.241us
+Average FCT long flows: 2231.449us
+p99 FCT long flows: 2987.592us
+p99.9 FCT long flows: 5129.14us
+Total recv throughput (short, n=74): 120.0 Gbps
+Average recv throughput (short): 2.0 Gbps
+Total recv throughput (long, n=34): 1248.0 Gbps
+Average recv throughput (long): 37.0 Gbps
+workloads/incast-trace-100G-degree-0.4.csv.processed
+Average FCT short flows: 90.026us
+p99 FCT short flows: 130.824us
+p99.9 FCT short flows: 131.874us
+Average FCT long flows: 2090.298us
+p99 FCT long flows: 3345.792us
+p99.9 FCT long flows: 3876.647us
+Total recv throughput (short, n=50): 225.0 Gbps
+Average recv throughput (short): 5.0 Gbps
+Total recv throughput (long, n=34): 1256.0 Gbps
+Average recv throughput (long): 37.0 Gbps
+workloads/incast-trace-100G-degree-0.6.csv.processed
+Average FCT short flows: 181.197us
+p99 FCT short flows: 245.88us
+p99.9 FCT short flows: 250.241us
+Average FCT long flows: 2231.449us
+p99 FCT long flows: 2987.592us
+p99.9 FCT long flows: 5129.14us
+Total recv throughput (short, n=74): 120.0 Gbps
+Average recv throughput (short): 2.0 Gbps
+Total recv throughput (long, n=34): 1248.0 Gbps
+Average recv throughput (long): 37.0 Gbps

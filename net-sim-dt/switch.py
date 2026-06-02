@@ -12,7 +12,7 @@ import copy
 class Switch():
     """Switch class"""
 
-    def __init__(self, addr, num_tor_ports, num_agg_ports, hosts_per_rack):
+    def __init__(self, addr, num_tor_ports, num_agg_ports, hosts_per_rack,ld):
         """Initialize parameters"""
         self.addr = addr  # address of switch
         self.links = {}   # links indexed by port, i.e., {port:link, ......, port:link}
@@ -20,7 +20,7 @@ class Switch():
                           # indexed by port, i.e., {port:[queue], ......, port:[queue]}
                           # each virtual output queue is a FIFO queue of infinite size
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 4 # in terms of number of size in Bytes
+        self.per_port_max_qsize = 3 # in terms of number of size in Bytes
         self.K = 4                   # threshold for ECN marking (in terms of number of packets)
 
         self.num_tor_ports = num_tor_ports
@@ -31,6 +31,9 @@ class Switch():
         self.packet_dropped = 0
         self.port_qsize = {}  # number of packets queued per port
         self.priority_classes = 3
+        self.l = int(float(ld)/0.2-1)
+        print(self.l)
+        
 
         
         if self.addr[0] == 't':
@@ -38,14 +41,14 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize*num_tor_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
             print(num_tor_ports)
         elif self.addr[0] == 'a':
             self.ports = num_agg_ports
             self.total_buffer_size = self.per_port_max_qsize*num_agg_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range (self.N)]
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
             print(num_agg_ports)
             
 
@@ -54,7 +57,7 @@ class Switch():
         self.final_add = [0 for i in range(self.N)]
         self.T = [self.total_buffer_size/(self.ports*self.priority_classes) for i in range(self.priority_classes)]
         self.sent = 0
-        self.alpha = [0.5,0.4,0.2]#[12,10,8]#[10,8,6]#[0.5,0.4,0.2]#[8,2,1]
+        self.alpha = [[0.5,0.4,0.2],[12,10,8],[0.5,0.4,0.2],[0.5,0.4,0.2]]#[12,10,8]#[10,8,6]#[0.5,0.4,0.2]#[8,2,1]
         self.t = 0
         self.track = 0
 
@@ -74,8 +77,8 @@ class Switch():
                         if packet.invalid == 0:
                             packet.hops +=1
                             if packet.prvt == 1:
-                                if self.per_port_buffer[port-1]==1:
-                                    self.per_port_buffer[port-1] = 0
+                                if self.per_port_buffer[port-1][i]==1:
+                                    self.per_port_buffer[port-1][i] = 0
                                 else:
                                     breakpoint()
                             else:
@@ -159,7 +162,7 @@ class Switch():
         #         if self.voq_port_qsize[n1][n2]>0.9*self.T[n2]:
         #             tot_al += self.alpha[n2]
         for n2 in range(self.priority_classes):
-            self.T[n2]= self.alpha[n2]*(self.total_buffer_size - self.total_usage)
+            self.T[n2]= self.alpha[self.l][n2]*(self.total_buffer_size - self.total_usage)
 
 ###############################################################################################################################################################
 
@@ -168,8 +171,8 @@ class Switch():
            arrivalTime is the timeslot in which the packet was received"""
         outPort = self.getOutPort(self.addr, packet)  # output port the packet needs to be sent out on
         
-        if self.per_port_buffer[outPort-1] == 0:
-            self.per_port_buffer[outPort-1] = 1
+        if self.per_port_buffer[outPort-1][packet.priority-1] == 0:
+            self.per_port_buffer[outPort-1][packet.priority-1] = 1
             # we have to introduce a new field for packet.py
             packet.prvt = 1
             self.queues[outPort][packet.priority-1].put(packet)

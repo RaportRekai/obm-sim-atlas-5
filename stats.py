@@ -13,7 +13,7 @@ path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
 
 
 def quantize_up(value,algo):
-    if algo == 'obm' or (algo == 'lqd' and wkld != '0.8'):
+    if (algo == 'obm' and wkld != '0.2') or (algo == 'lqd-ideal' and wkld != '0.2') or (algo == 'lqd' and wkld != '0.8'):
         return 5 * math.ceil(value / 5)
     return value
 
@@ -61,7 +61,10 @@ r = 4
 pr = 99
 if float(wkld) == 0.62:
     r = 0
-    pr = 86
+    pr = 80
+if float(wkld) == 0.4:
+    r = 0
+    pr = 80
 
 def print_fct_stats(name, arr):
     arr = sorted(arr)

@@ -19,7 +19,7 @@ class Switch():
                           # indexed by port, i.e., {port:[queue], ......, port:[queue]}
                           # each virtual output queue is a FIFO queue of infinite size
         self.voq_rr = {}  # stores the VOQ per port to be serviced next
-        self.per_port_max_qsize = 4  # in terms of number of 1500B packets
+        self.per_port_max_qsize = 3  # in terms of number of 1500B packets
                                        # threshold for ECN marking (in terms of number of packets)
         self.per_port_buffer = 1
         self.flag = 0
@@ -37,14 +37,14 @@ class Switch():
             self.K = 4
             self.ports = num_tor_ports
             self.total_buffer_size = self.per_port_max_qsize*num_tor_ports
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
             self.N = 1 if num_tor_ports < 1 else 2 ** ((num_tor_ports - 1).bit_length())
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
             print(num_tor_ports)
         elif self.addr[0] == 'a':
             self.K = 4
             self.ports = num_agg_ports
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
             self.total_buffer_size = self.per_port_max_qsize*num_agg_ports
             self.N = 1 if num_agg_ports < 1 else 2 ** ((num_agg_ports - 1).bit_length())
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range (self.N)]
@@ -81,8 +81,8 @@ class Switch():
                         if packet.invalid == 0:
                             packet.hops +=1
                             if packet.prvt == 1:
-                                if self.per_port_buffer[port-1]==1:
-                                    self.per_port_buffer[port-1] = 0
+                                if self.per_port_buffer[port-1][i]==1:
+                                    self.per_port_buffer[port-1][i] = 0
                                 else:
                                     breakpoint()
                             else:
@@ -237,7 +237,7 @@ class Switch():
                                         print("Unfortunately Dropping priority 1 packet")
                                     #self.buffer[ind] = [-1,-1]
                                 
-                                while ((target_queue.queue[target_queue.qsize()-c-1].invalid ==1 and c!=target_queue.qsize()) or target_queue.queue[target_queue.qsize()-c-1].prvt == 1):
+                                while ((target_queue.queue[target_queue.qsize()-c-1].invalid ==1 and c!=target_queue.qsize()) or (target_queue.queue[target_queue.qsize()-c-1].prvt == 1 and c!=target_queue.qsize())):
                                     c+=1
                                 
                                 if c==target_queue.qsize(): 
@@ -283,20 +283,20 @@ class Switch():
     def allct(self,mem):
         space = sum(mem)
         trk = 0
-        #for prio in range(self.priority_classes):
-        for ind,i in enumerate(self.buffer):
-            if i[1] != -1:
-                    self.queues[i[1]][i[0].priority-1].put(i[0])
-                    trk +=1
-                    self.total_usage +=1
-                    self.port_qsize[i[1]] += 1
-                    #self.setECNFlag(i[0], i[1])
-                    self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
-                    self.buffer[ind] = [-1,-1]
+        for prio in range(self.priority_classes):
+            for ind,i in enumerate(self.buffer):
+                if i[1] != -1:
+                        self.queues[i[1]][i[0].priority-1].put(i[0])
+                        trk +=1
+                        self.total_usage +=1
+                        self.port_qsize[i[1]] += 1
+                        #self.setECNFlag(i[0], i[1])
+                        self.voq_port_qsize[i[1]-1][i[0].priority-1]+=1
+                        self.buffer[ind] = [-1,-1]
+                if trk == space:
+                    break
             if trk == space:
                 break
-            # if trk == space:
-            #     break
         
         for i in range(len(self.buffer)):
             self.buffer[i] = [-1,-1]
@@ -311,8 +311,8 @@ class Switch():
         outPort = self.getOutPort(self.addr, packet)  # output port the packet needs to be sent out on
         
 ################################################################################ BIT MAPPER ########################################################################################
-        if self.per_port_buffer[outPort-1] == 0:
-            self.per_port_buffer[outPort-1] = 1
+        if self.per_port_buffer[outPort-1][packet.priority-1] == 0:
+            self.per_port_buffer[outPort-1][packet.priority-1] = 1
             # we have to introduce a new field for packet.py
             packet.prvt = 1
             self.queues[outPort][packet.priority-1].put(packet)

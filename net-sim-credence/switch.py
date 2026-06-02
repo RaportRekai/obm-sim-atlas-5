@@ -29,7 +29,7 @@ class Switch():
         self.links = {}
         self.queues = {}
         self.voq_rr = {}
-        self.per_port_max_qsize = 4
+        self.per_port_max_qsize = 10
         self.K = 25 # ECN Threshold
 
         self.num_tor_ports = num_tor_ports
@@ -58,13 +58,13 @@ class Switch():
             self.total_buffer_size = self.per_port_max_qsize * num_tor_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
         elif self.addr[0] == 'a':
             self.ports = num_agg_ports
             self.total_buffer_size = self.per_port_max_qsize * num_agg_ports
             self.N = self.ports
             self.voq_port_qsize = [[0 for i in range(self.priority_classes)] for _ in range(self.N)]
-            self.per_port_buffer = [0 for _ in range(self.ports)]
+            self.per_port_buffer = [[0 for _ in range(self.priority_classes)] for i in range(self.ports)]
 
         # Initialize tracking dicts
         for i in range(1, self.N + 1):
@@ -142,8 +142,8 @@ class Switch():
                         if packet.invalid == 0:
                             packet.hops +=1
                             if packet.prvt == 1:
-                                if self.per_port_buffer[port-1]==1:
-                                    self.per_port_buffer[port-1] = 0
+                                if self.per_port_buffer[port-1][i]==1:
+                                    self.per_port_buffer[port-1][i] = 0
                                 else:
                                     breakpoint()
                             else:
@@ -208,8 +208,8 @@ class Switch():
         Handle the packet received using CREDENCE logic.
         """
         outPort = self.getOutPort(self.addr, packet)
-        if self.per_port_buffer[outPort-1] == 0:
-            self.per_port_buffer[outPort-1] = 1
+        if self.per_port_buffer[outPort-1][packet.priority-1] == 0:
+            self.per_port_buffer[outPort-1][packet.priority-1] = 1
             # we have to introduce a new field for packet.py
             packet.prvt = 1
             self.queues[outPort][packet.priority-1].put(packet)

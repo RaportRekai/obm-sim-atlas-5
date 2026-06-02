@@ -22,7 +22,7 @@ def next_token_value(tokens, key_with_colon):
 def read_data(wkld):
     """Reads logs for all algos and returns a dictionary of data"""
     data_store = {algo: {'short': [], 'long': []} for algo in ALGOS}
-    algo_run_no = {'credence':1, 'dt':2, 'abm':2, 'obm':1, 'occamy':7}
+    algo_run_no = {'credence':1, 'dt':23, 'abm':26, 'obm':67, 'occamy':7}
     for algo in ALGOS:
         # Assumes folder naming convention: net-sim-occamy/logs/...
         #path = f'net-sim-{algo}/logs/recvd-flows-{wkld}.txt'
